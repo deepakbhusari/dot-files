@@ -11,10 +11,15 @@ cd dot
 ./script-stow-config-files.sh
 
 Resources : 
+
 Homebrew : https://brew.sh/
+
 vim : https://www.vim.org/
+
 nvim : https://neovim.io/
+
 stow : https://www.gnu.org/software/stow/
+
 zsh : https://zsh.sourceforge.io/
 
 
