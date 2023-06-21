@@ -12,6 +12,7 @@ local vimo = vim.o
 --mappings functions in lua
 local function map(kind, lhs, rhs, opts)
   vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+  -- example vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap=true})
 end
 
 local silentnoremap = { noremap = true, silent = true }
