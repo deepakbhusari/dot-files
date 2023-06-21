@@ -2,12 +2,12 @@
 
 #dot files are in folder ~/dev/dot
 # stow configuration files
-stow -v zsh
-stow -v nvim
-stow -v vim
-stow -v starship
-stow -v skhd
-stow -v yabai
+stow -t ~ -v zsh
+stow -t ~ -v nvim
+stow -t ~ -v vim
+stow -t ~ -v starship
+stow -t ~ -v skhd
+stow -t ~ -v yabai
 #This will copy files to /etc/data folder (-t option)
 #stow -t /etc/data vim
 
