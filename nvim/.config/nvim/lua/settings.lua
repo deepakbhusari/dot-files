@@ -84,6 +84,8 @@ set scrolloff=8
 
 set colorcolumn=120
 set signcolumn=yes
+"set column divider color to grey
+highlight ColorColumn ctermbg=0 guibg=grey
 
 "colorscheme torte
 "colorscheme tokyonight
