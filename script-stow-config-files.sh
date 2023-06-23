@@ -11,3 +11,4 @@ stow -t ~ -v yabai
 #This will copy files to /etc/data folder (-t option)
 #stow -t /etc/data vim
 
+
