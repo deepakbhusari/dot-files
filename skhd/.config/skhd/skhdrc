@@ -190,3 +190,4 @@ shift + alt - 7 : yabai -m window --space 7;
 #ctrl + alt - s : brew services start yabai
 #ctrl + alt - r : brew services restart yabai
 
+

@@ -3,3 +3,4 @@ require 'config/plugins_lazy'
 require 'settings'
 -- require 'plugins'
 --require 'debug.lua'
+

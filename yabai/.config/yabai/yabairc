@@ -58,3 +58,4 @@ yabai -m rule --add app="^QuickTime Player$" manage=off
 
 echo "yabai configuration loaded.."
 
+
