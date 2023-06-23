@@ -12,4 +12,3 @@ stow -t ~ -v yabai
 #stow -t /etc/data vim
 
 
-
