@@ -21,9 +21,9 @@ set rtp+=/opt/homebrew/opt/fzf
 # Enable vi mode
 bindkey -v
 
-alias v=~/.nix-profile/bin/vi
-alias vi=~/.nix-profile/bin/nvim
-alias vi=/opt/homebrew/bin/nvim
+#alias v=~/.nix-profile/bin/vi
+#alias vi=~/.nix-profile/bin/nvim
+#alias vi=/opt/homebrew/bin/nvim
 #alias ll="ls -al"
 alias tree="exa --tree"
 alias ls="exa"
@@ -35,7 +35,7 @@ alias s="stow -v "
 
 alias f="fd --type f --hidden |fzf |xargs nvim"
 
-export SHELL=~/nix-profile/bin/zsh
+#export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
 export PATH="$PATH:Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
