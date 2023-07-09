@@ -23,7 +23,7 @@ bindkey -v
 
 #alias v=~/.nix-profile/bin/vi
 #alias vi=~/.nix-profile/bin/nvim
-#alias vi=/opt/homebrew/bin/nvim
+alias vi=/opt/homebrew/bin/nvim
 #alias ll="ls -al"
 alias tree="exa --tree"
 alias ls="exa"
