@@ -211,9 +211,11 @@ nnoremap <leader>p "_dP
 vnoremap <C-c> "+y
 inoremap <C-v> <C-r>+
 
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
 "mappings
-
-
 
 ]]
 

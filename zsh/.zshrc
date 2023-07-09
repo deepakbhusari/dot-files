@@ -29,7 +29,7 @@ alias tree="exa --tree"
 alias ls="exa"
 alias ll="exa -alhs modified"
 
-alias cat="bat"
+#alias cat="bat"
 #stow
 alias s="stow -v "
 
