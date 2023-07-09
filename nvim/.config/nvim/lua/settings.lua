@@ -216,6 +216,8 @@ nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
 nnoremap gb :ls<CR>:b<Space>
+nnoremap 0 ^
+nnoremap ^ 0
 
 "colorscheme habamax
 
