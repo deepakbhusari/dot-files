@@ -217,6 +217,8 @@ nnoremap <C-P> :bprev<CR>
 
 nnoremap gb :ls<CR>:b<Space>
 
+"colorscheme habamax
+
 "mappings
 
 ]]
