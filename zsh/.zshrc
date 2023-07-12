@@ -35,6 +35,27 @@ alias s="stow -v "
 
 alias f="fd --type f --hidden |fzf |xargs nvim"
 
+#git alias
+alias gst='git status'
+alias gaa='git add --all'
+alias gl='git pull'
+alias gp='git push'
+alias gd='git diff | mate'
+alias gau='git add --update'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcot='git checkout -t'
+alias gcotb='git checkout --track -b'
+alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias gld='git log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph'
+alias gls='git log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
+
+
+
 #export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
 export PATH="$PATH:Applications/Visual Studio Code.app/Contents/Resources/app/bin"
