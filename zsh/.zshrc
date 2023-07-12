@@ -36,6 +36,7 @@ alias s="stow -v "
 alias f="fd --type f --hidden |fzf |xargs nvim"
 
 #git alias
+alias gs='git status'
 alias gst='git status'
 alias gaa='git add --all'
 alias gl='git pull'
