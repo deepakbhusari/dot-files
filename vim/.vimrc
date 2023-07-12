@@ -163,6 +163,13 @@ nnoremap gb :ls<CR>:b<Space>
 nnoremap 0 ^
 nnoremap ^ 0
 
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+
+noremap x "_x
+vnoremap p "_dP
+
+
 colorscheme habamax
 
 "mappings
