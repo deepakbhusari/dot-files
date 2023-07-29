@@ -41,7 +41,8 @@ alias gst='git status'
 alias gaa='git add --all'
 alias gl='git pull'
 alias gp='git push'
-alias gd='git diff | mate'
+alias gd='git diff | kdiff3'
+alias gd='git diff'
 alias gau='git add --update'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
@@ -55,7 +56,8 @@ alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn
 alias gld='git log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph'
 alias gls='git log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
 
-
+alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
+#alias fi='vi $(find . -type f -path "*/.*"|fzf)'
 
 #export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
