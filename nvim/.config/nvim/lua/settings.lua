@@ -46,7 +46,6 @@ vimo.showmatch = true -- When a bracket is inserted, briefly jump to the matchin
 vimo.showcmd = true -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 vimo.inccommand = 'split' -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 vimo.splitbelow = 'splitright' -- When on, splitting a window will put the new window below the current one
---vimo.colorscheme = "torte"
 
 vim.cmd [[
 
@@ -60,7 +59,6 @@ set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
-set guicursor=
 set nu
 set relativenumber
 set incsearch
@@ -223,6 +221,26 @@ nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 "colorscheme habamax
+
+if $TERM == "xterm-kitty"
+    try
+" Change the cursor in different modes
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
+
+"Cursor settings:
+
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+"
+    catch
+    endtry
+endif
 
 noremap x "_x
 vnoremap p "_dP
