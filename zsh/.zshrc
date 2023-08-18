@@ -6,9 +6,17 @@ export EDITOR=vi
 #PROMPT="[%D@%T %H:%M:%S}] %m-%h-:~ "
 PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
 
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # K8s auto-complete
-autoload -U +X compinit && compinit
-source <(kubectl completion zsh)
+#autoload -U +X compinit && compinit
+#source <(kubectl completion zsh)
 
 #source ~/./antigen.zsh
 
@@ -37,10 +45,10 @@ alias f="fd --type f --hidden |fzf |xargs nvim"
 
 #git alias
 alias gs='git status'
-alias gst='git status'
+alias gsh='git show'
 alias gaa='git add --all'
-alias gl='git pull'
-alias gp='git push'
+alias gu='git push'
+alias gp='git pull'
 alias gd='git diff | kdiff3'
 alias gd='git diff'
 alias gau='git add --update'
@@ -52,7 +60,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcot='git checkout -t'
 alias gcotb='git checkout --track -b'
-alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias gl='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
 alias gld='git log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph'
 alias gls='git log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
 
