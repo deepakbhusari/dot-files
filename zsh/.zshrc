@@ -44,9 +44,11 @@ alias s="stow -v "
 alias f="fd --type f --hidden |fzf |xargs nvim"
 
 #git alias
+alias gaa='git add --all'
+alias gba='git branch -a'
+alias ge='git clone --depth=1 '
 alias gs='git status'
 alias gsh='git show'
-alias gaa='git add --all'
 alias gu='git push'
 alias gp='git pull'
 alias gd='git diff | kdiff3'
@@ -55,7 +57,6 @@ alias gau='git add --update'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gb='git branch'
-alias gba='git branch -a'
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcot='git checkout -t'
