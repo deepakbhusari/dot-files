@@ -245,6 +245,8 @@ endif
 noremap x "_x
 vnoremap p "_dP
 
+autocmd FileType c,cpp setlocal equalprg=clang-format
+
 "mappings
 
 ]]
@@ -270,8 +272,7 @@ map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { silent = true })
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { silent = true })
 
 --terminal
-map('n', '<leader><leader>','<cmd>tabnew term://zsh<cr>A', { silent = true })
+map('n', '<leader><leader>', '<cmd>tabnew term://zsh<cr>A', { silent = true })
 
 --map(':tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-

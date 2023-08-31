@@ -21,6 +21,7 @@ require('lazy').setup {
     -- add LazyVim and import its plugins
     -- The folder can be custom.plugins or plugins
     { import = 'plugins' },
+    { import = 'plugins.lsp' },
     -- import/override with your plugins
     --    { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
     -- import any extras modules here
@@ -44,7 +45,10 @@ require('lazy').setup {
   install = { colorscheme = { 'catppuccin', 'tokyonight' } },
   checker = {
     enabled = true, -- automatically check for plugin updates
-    -- notify = false, -- don't notify
+    notify = false, -- don't notify
+  },
+  change_detection ={
+    notify = false,
   },
   performance = {
     rtp = {
