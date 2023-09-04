@@ -194,3 +194,5 @@ let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
     endtry
 endif
 
+autocmd FileType c,cpp setlocal equalprg=clang-format
+
