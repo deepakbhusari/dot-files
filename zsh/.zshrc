@@ -42,6 +42,7 @@ alias ll="exa -alhs modified"
 alias s="stow -v "
 
 alias f="fd --type f --hidden |fzf |xargs nvim"
+alias fzf="fzf --tac --multi --reverse --cycle"
 
 #git alias
 alias gaa='git add --all'

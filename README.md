@@ -8,7 +8,7 @@ git clone https://github.com/deepakbhusari/dot-files.git dot-files
 
 Note : Install homebrew to install stow
 
-cd dot
+cd dot-files
 
 ./script-stow-config-files.sh
 
