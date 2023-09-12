@@ -57,6 +57,10 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
 
+#history
+alias h="history"
+alias hv="history|nvim"
+
 #git alias
 alias gaa='git add --all'
 alias gba='git branch -a'
