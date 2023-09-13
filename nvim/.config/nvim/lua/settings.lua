@@ -47,6 +47,19 @@ vimo.showcmd = true -- Show (partial) command in the last line of the screen. Se
 vimo.inccommand = 'split' -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 vimo.splitbelow = 'splitright' -- When on, splitting a window will put the new window below the current one
 
+local options = {
+  autoindent = true,
+  numberwidth = 4,
+  showtabline = 0,
+  hlsearch = false,
+  ignorecase = true,
+  smartcase = true,
+  undofile = true,
+}
+for option, value in pairs(options) do
+  vimo[option] = value
+end
+
 vim.cmd [[
 
 syntax on
@@ -70,7 +83,6 @@ set nowrap
 set termguicolors
 set noshowmode
 " set buffers open
-set hidden
 
 "undo
 set noswapfile
@@ -209,7 +221,6 @@ nnoremap <leader>p "_dP
 vnoremap <C-c> "+y
 inoremap <C-v> <C-r>+
 
-set hidden
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
