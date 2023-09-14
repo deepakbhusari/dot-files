@@ -113,3 +113,10 @@ esac
 # pnpm end
 
 
+
+# bun completions
+[ -s "/Users/manisha/.bun/_bun" ] && source "/Users/manisha/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
