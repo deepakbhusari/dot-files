@@ -23,6 +23,8 @@ vim.scriptencoding = 'utf-8'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.loader.enable()
+
 -- Editor options
 
 vimo.number = true
@@ -255,7 +257,7 @@ endif
 
 noremap x "_x
 vnoremap p "_dP
-
+set showtabline=2
 autocmd FileType c,cpp setlocal equalprg=clang-format
 
 "mappings

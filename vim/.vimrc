@@ -168,6 +168,7 @@ nnoremap <C-y> 5<C-y>
 noremap x "_x
 vnoremap p "_dP
 
+set showtabline=2
 
 colorscheme habamax
 
