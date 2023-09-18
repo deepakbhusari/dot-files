@@ -287,5 +287,7 @@ map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { silent = true })
 --terminal
 map('n', '<leader><leader>', '<cmd>tabnew term://zsh<cr>A', { silent = true })
 
+map('n', '<leader>rr', '<c-t><c-c><up><cr><c-t>', { silent = true })
+
 --map(':tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
