@@ -7,13 +7,14 @@ return {
 
   keys = {
     {
-      '<leader>-',
+      '<leader>e',
       function()
         require('oil').open_float()
       end,
     },
     {
-      '<leader>--',
+      --'<leader>--',
+      '<leader>ee',
       function()
         require('oil').close()
       end,
