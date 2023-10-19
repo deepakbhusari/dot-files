@@ -8,6 +8,9 @@
 
 --define variables for vim
 local vimo = vim.o
+local cmd = vim.cmd
+local g = vim.g
+local opt = vim.opt
 
 --mappings functions in lua
 local function map(kind, lhs, rhs, opts)
@@ -20,8 +23,8 @@ local silentnoremap = { noremap = true, silent = true }
 vim.scriptencoding = 'utf-8'
 
 -- Map <leader>
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+g.mapleader = ' '
+g.maplocalleader = ' '
 
 vim.loader.enable()
 
@@ -100,6 +103,9 @@ set signcolumn=yes
 highlight ColorColumn ctermbg=0 guibg=grey
 
 "colorscheme torte
+
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
 "colorscheme tokyonight
 
 "mappings
