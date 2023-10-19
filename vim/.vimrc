@@ -4,8 +4,8 @@ let mapleader=" "
 
 "vi configuration
 set exrc
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 set nu
