@@ -1,18 +1,33 @@
 #PROMPT = '%1~ %# '
 
+
+#This is to capture zsh shell performance
+#zmodload zsh/datetime
+#setopt PROMPT_SUBST
+#PS4='+$EPOCHREALTIME %N:%i> '
+
+#logfile=$(mktemp zsh_profile.XXXXXXXX)
+#echo "Logging to $logfile"
+#exec 3>&2 2>$logfile
+
+#setopt XTRACE
+
+#To measure current zsh config performznce
+#time zsh -i -c echo
+#This is to capture zsh shell performance
+
 export EDITOR=vi
-#PROMPT=""
 #PROMPT="%n-%D@%T:~ "
 #PROMPT="[%D@%T %H:%M:%S}] %m-%h-:~ "
-PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
+#PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
 
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+#if type brew &>/dev/null
+#then
+#  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-  autoload -Uz compinit
-  compinit
-fi
+#  autoload -Uz compinit
+#  compinit
+#fi
 
 # K8s auto-complete
 #autoload -U +X compinit && compinit
@@ -34,9 +49,9 @@ bindkey -v
 alias vi="/opt/homebrew/bin/nvim -p "
 alias vimdiff="/opt/homebrew/bin/nvim -d "
 #alias ll="ls -al"
-alias tree="exa --tree"
-alias ls="exa"
-alias ll="exa -alhs modified"
+alias tree="lsd --tree"
+alias ls="lsd"
+alias ll="lsd --long --sort time --reverse"
 
 #alias cat="bat"
 #stow
@@ -80,10 +95,11 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcot='git checkout -t'
 alias gcotb='git checkout --track -b'
-alias gl='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
-alias glf='git log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
-alias gld='git log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
-alias glr='git log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
+alias gl='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
+alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
+alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
+alias gld='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
+alias glr='git log --pretty=format:"%C(green)%H\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
 
 alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 #alias fi='vi $(find . -type f -path "*/.*"|fzf)'
@@ -93,7 +109,7 @@ alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 export PATH="$PATH:Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 eval "$(/opt/homebrew/bin/starship init zsh)"
-eval "$(/opt/homebrew/bin/zoxide init zsh)"
+#eval "$(/opt/homebrew/bin/zoxide init zsh)"
 
 se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
 vf() {fzf|xargs -or -I % $EDITOR %;}
@@ -117,8 +133,15 @@ esac
 
 
 # bun completions
-[ -s "/Users/manisha/.bun/_bun" ] && source "/Users/manisha/.bun/_bun"
+#[ -s "/Users/manisha/.bun/_bun" ] && source "/Users/manisha/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+#This is to capture zsh shell performance
+unsetopt XTRACE
+#exec 2>&3 3>&-
+#This is to capture zsh shell performance
+
