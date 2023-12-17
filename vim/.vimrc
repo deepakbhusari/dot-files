@@ -9,7 +9,7 @@ set shiftwidth=2
 set expandtab
 set smartindent
 set nu
-set relativenumber
+"set relativenumber
 set incsearch
 set nohlsearch
 set hidden
@@ -171,6 +171,9 @@ vnoremap p "_dP
 set showtabline=2
 
 colorscheme habamax
+
+"Toggle highlights
+nnoremap <c-h> :set hlsearch!<CR>
 
 "mappings
 
