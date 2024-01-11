@@ -78,7 +78,7 @@ set shiftwidth=2
 set expandtab
 set smartindent
 set nu
-set relativenumber
+"set relativenumber
 set incsearch
 set nohlsearch
 set hidden
@@ -112,7 +112,7 @@ let g:tokyonight_enable_italic = 1
 
 
 "mappings
-"norm Q gq
+" norm Q gq
 
 " Number 5
 nnoremap Y y$
@@ -229,7 +229,7 @@ nnoremap <leader>p "_dP
 vnoremap <C-c> "+y
 inoremap <C-v> <C-r>+
 
-nnoremap <C-N> :bnext<CR>
+" nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
 nnoremap gb :ls<CR>:b<Space>
@@ -240,6 +240,9 @@ nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 "colorscheme habamax
+
+"Toggle highlights
+nnoremap <c-h> :set hlsearch!<CR>
 
 if $TERM == "xterm-kitty"
     try
@@ -297,3 +300,7 @@ map('n', '<leader>rr', '<c-t><c-c><up><cr><c-t>', { silent = true })
 
 --map(':tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+map("n", "<leader>p", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  {silent=true, desc = "Replace word under cursor" })
+
