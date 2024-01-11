@@ -79,27 +79,32 @@ alias hv="history|nvim"
 
 #git alias
 alias gaa='git add --all'
-alias gba='git branch -a'
-alias ge='git clone --depth=1 '
-alias gs='git status'
-alias gsh='git show'
-alias gu='git push'
-alias gp='git pull'
-alias gd='git diff | kdiff3'
-alias gd='git diff'
 alias gau='git add --update'
+alias gb='git branch'
+alias gba='git branch -a'
 alias gc='git commit -v'
 alias gca='git commit -v -am'
-alias gb='git branch'
+alias gcf='git cat-file blob' #pass the hash object
+alias gct='git cat-file -t'
 alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcot='git checkout -t'
 alias gcotb='git checkout --track -b'
+# alias gd='git diff | kdiff3'
+alias gd='git diff'
+alias ge='git clone'
+alias ge1='git clone --depth=1'
+alias gh='git hash-object -w' #pass the file-name
 alias gl='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
-alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
-alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
 alias gld='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
+alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
+alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
 alias glr='git log --pretty=format:"%C(green)%H\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
+alias glt='git ls-tree' #pass the hash-object
+alias gp='git pull'
+alias gs='git status'
+alias gsh='git show'
+alias gu='git push'
 
 alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 #alias fi='vi $(find . -type f -path "*/.*"|fzf)'
@@ -110,6 +115,7 @@ export PATH="$PATH:Applications/Visual Studio Code.app/Contents/Resources/app/bi
 
 eval "$(/opt/homebrew/bin/starship init zsh)"
 #eval "$(/opt/homebrew/bin/zoxide init zsh)"
+eval "$(/opt/homebrew/bin/zoxide init zsh)"
 
 se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
 vf() {fzf|xargs -or -I % $EDITOR %;}
@@ -117,7 +123,7 @@ c() {cp -v "$1" "$(awk '{print $2}' ~/.config |grep -vi memes |fzf| sed "s|~|$HO
 
 #tmux configuration
 export TMUX=screen-256color
-alias tm="tmux a -t dev || tmux new -t dev"
+alias t="tmux a -t dev || tmux new -t dev"
 
 export PATH="/opt/homebrew/bin:$PATH"
 
@@ -145,3 +151,4 @@ unsetopt XTRACE
 #exec 2>&3 3>&-
 #This is to capture zsh shell performance
 
+export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
