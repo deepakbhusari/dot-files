@@ -35,21 +35,22 @@ vimo.number = true
 vimo.clipboard = 'unnamedplus' -- uses the clipboard register for all operations except yank.
 -- o.syntax = "on" -- When this option is set, the syntax with this name is loaded.
 -- o.autoindent = true -- Copy indent from current line when starting a new line.
-vimo.cursorline = true -- Highlight the screen line of the cursor with CursorLine.
-vimo.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
-vimo.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent.
-vimo.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
-vimo.encoding = 'utf-8' -- Sets the character encoding used inside Vim.
-vimo.fileencoding = 'utf-8' -- Sets the character encoding for the file of this buffer.
-vimo.ruler = true -- Show the line and column number of the cursor position, separated by a comma.
+vimo.cursorline = true         -- Highlight the screen line of the cursor with CursorLine.
+vimo.expandtab = true          -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
+vimo.shiftwidth = 2            -- Number of spaces to use for each step of (auto)indent.
+vimo.tabstop = 2               -- Number of spaces that a <Tab> in the file counts for.
+vimo.encoding = 'utf-8'        -- Sets the character encoding used inside Vim.
+vimo.fileencoding = 'utf-8'    -- Sets the character encoding for the file of this buffer.
+vimo.ruler = true              -- Show the line and column number of the cursor position, separated by a comma.
 --vimo.mouse = "a" -- Enable the use of the mouse. "a" you can use on all modes
-vimo.title = true -- When on, the title of the window will be set to the value of 'titlestring'
-vimo.hidden = true -- When on a buffer becomes hidden when it is |abandon|ed
-vimo.ttimeoutlen = 0 -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
-vimo.wildmenu = true -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
-vimo.showmatch = true -- When a bracket is inserted, briefly jump to the matching one.
-vimo.showcmd = true -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
-vimo.inccommand = 'split' -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
+vimo.title = true              -- When on, the title of the window will be set to the value of 'titlestring'
+vimo.hidden = true             -- When on a buffer becomes hidden when it is |abandon|ed
+vimo.ttimeoutlen = 0           -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
+vimo.wildmenu = true           -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+vimo.showmatch = true          -- When a bracket is inserted, briefly jump to the matching one.
+vimo.showcmd = true            -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
+vimo.inccommand =
+'split'                        -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 vimo.splitbelow = 'splitright' -- When on, splitting a window will put the new window below the current one
 
 local options = {
@@ -212,7 +213,7 @@ function! Preserve(command)
 	" Clean up: restore previous search history, and cursor position
 	let @/=_s
 	call cursor(l, c)
-endfunction 
+endfunction
 nnoremap <silent>_$ :call Preserve("%s/\\s\\+$//e")<CR>
 nnoremap <silent>_= :call Preserve("normal gg=G")<CR>
 
@@ -293,6 +294,8 @@ map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { silent = true })
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { silent = true })
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { silent = true })
 
+map('n', 'Y', 'y$', { silent = true, desc = "Yank to end of line" })
+
 --terminal
 map('n', '<leader><leader>', '<cmd>tabnew term://zsh<cr>A', { silent = true })
 
@@ -302,5 +305,4 @@ map('n', '<leader>rr', '<c-t><c-c><up><cr><c-t>', { silent = true })
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 map("n", "<leader>p", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  {silent=true, desc = "Replace word under cursor" })
-
+  { silent = true, desc = "Replace word under cursor" })
