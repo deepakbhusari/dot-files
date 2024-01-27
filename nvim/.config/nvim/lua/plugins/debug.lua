@@ -18,6 +18,10 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
 
+    "mfussenegger/nvim-dap",
+    --    config = function() end,
+
+    { "theHamsta/nvim-dap-virtual-text" },
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
   },
@@ -81,5 +85,3 @@ return {
     require('dap-go').setup()
   end,
 }
-
-

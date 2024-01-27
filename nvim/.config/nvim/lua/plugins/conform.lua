@@ -1,6 +1,6 @@
 return {
   'stevearc/conform.nvim',
-   event = { "BufWritePre" },
+  event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
     {
@@ -28,6 +28,9 @@ return {
       shfmt = {
         prepend_args = { "-i", "2" },
       },
+      black = {
+        prepend_args = { "--line-length=200" },
+      }
     },
   },
   init = function()
@@ -35,4 +38,3 @@ return {
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
-
