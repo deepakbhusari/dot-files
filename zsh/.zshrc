@@ -74,7 +74,7 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 # fzf
 
 #history
-alias h="history"
+alias h="history 100|grep "
 alias hv="history|nvim"
 
 #git alias
