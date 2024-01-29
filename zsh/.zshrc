@@ -1,3 +1,5 @@
+# CodeWhisperer pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
 #PROMPT = '%1~ %# '
 
 
@@ -152,3 +154,9 @@ unsetopt XTRACE
 #This is to capture zsh shell performance
 
 export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
+
+export TERM=xterm-256color
+
+# CodeWhisperer post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
+
