@@ -46,6 +46,16 @@ set rtp+=/opt/homebrew/opt/fzf
 # Enable vi mode
 bindkey -v
 
+#find folders with size greater than 1g
+alias fff='du -sh .[^.]* * | grep -E "\dG"'
+
+alias tl='tldr'
+
+#This would allow to move between words CMD <- or CMD -> on terminal
+#bindkey -e
+#bindkey '^[[1;9C' forward-word
+#bindkey '^[[1;9D' backward-word
+
 #alias v=~/.nix-profile/bin/vi
 #alias vi=~/.nix-profile/bin/nvim
 alias vi="/opt/homebrew/bin/nvim -p "
@@ -96,7 +106,7 @@ alias gcotb='git checkout --track -b'
 alias gd='git diff'
 alias ge='git clone'
 alias ge1='git clone --depth=1'
-alias gh='git hash-object -w' #pass the file-name
+alias gho='git hash-object -w' #pass the file-name
 alias gl='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
 alias gld='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
 alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
