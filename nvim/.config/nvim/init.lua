@@ -3,6 +3,6 @@ if vim.loader then
   vim.loader.enable()
 end
 
-require ('config/plugins_lazy')
 require ('settings')
+require ('config/plugins_lazy')
 
