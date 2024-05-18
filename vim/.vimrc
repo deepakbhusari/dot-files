@@ -170,6 +170,8 @@ vnoremap p "_dP
 
 set showtabline=2
 
+set rtp+=/opt/homebrew/opt/fzf
+
 colorscheme habamax
 
 "Toggle highlights
