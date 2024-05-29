@@ -47,7 +47,7 @@ set rtp+=/opt/homebrew/opt/fzf
 bindkey -v
 
 #find folders with size greater than 1g
-alias fff='du -sh .[^.]* * | grep -E "\dG"'
+alias f1g='du -sh .[^.]* * | grep -E "\dG"'
 
 alias tl='tldr'
 
@@ -123,11 +123,16 @@ alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 
 #export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
-export PATH="$PATH:Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:"
 
 eval "$(/opt/homebrew/bin/starship init zsh)"
 #eval "$(/opt/homebrew/bin/zoxide init zsh)"
 eval "$(/opt/homebrew/bin/zoxide init zsh)"
+
+eval "$(fzf --zsh)"
+
+
+alias zq="zoxide query -ls"
 
 se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
 vf() {fzf|xargs -or -I % $EDITOR %;}
@@ -137,6 +142,7 @@ c() {cp -v "$1" "$(awk '{print $2}' ~/.config |grep -vi memes |fzf| sed "s|~|$HO
 export TMUX=screen-256color
 alias t="tmux a -t dev || tmux new -t dev"
 
+PATH=~/.cargo/bin:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
 
 
@@ -166,7 +172,19 @@ unsetopt XTRACE
 export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
 
 export TERM=xterm-256color
+#To use the bundled libc++ please add the following LDFLAGS:
+#LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # CodeWhisperer post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
+
+
+PATH=~/.console-ninja/.bin:$PATH
+
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
+complete -C '/usr/local/bin/aws_completer' aws
 
