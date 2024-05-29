@@ -51,7 +51,9 @@ vimo.showmatch = true          -- When a bracket is inserted, briefly jump to th
 vimo.showcmd = true            -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 vimo.inccommand =
 'split'                        -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
-vimo.splitbelow = 'splitright' -- When on, splitting a window will put the new window below the current one
+--vimo.splitbelow = 'splitright' -- When on, splitting a window will put the new window below the current one
+vimo.splitbelow = false -- When on, splitting a window will put the new window below the current one
+
 
 local options = {
   autoindent = true,
@@ -269,6 +271,8 @@ noremap x "_x
 vnoremap p "_dP
 set showtabline=2
 autocmd FileType c,cpp setlocal equalprg=clang-format
+
+let &grepprg='rg --vimgrep --smart-case -n  $*'
 
 "mappings
 
