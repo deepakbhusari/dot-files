@@ -39,6 +39,7 @@ end
 return {
   'nvim-treesitter/nvim-treesitter-textobjects',
   after = 'nvim-treesitter',
+  event = 'VeryLazy',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = setup,
   --cmd = { "Telescope" }
