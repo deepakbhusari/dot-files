@@ -49,6 +49,9 @@ bindkey -v
 #find folders with size greater than 1g
 alias f1g='du -sh .[^.]* * | grep -E "\dG"'
 
+alias g='grep --color '
+alias gr='grep --color -r '
+alias gri='grep --color -ir '
 alias tl='tldr'
 
 #This would allow to move between words CMD <- or CMD -> on terminal
