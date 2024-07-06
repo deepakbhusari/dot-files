@@ -74,6 +74,7 @@ alias s="stow -v "
 
 # fzf
 alias e="fd --type f --hidden |fzf |xargs nvim"
+alias f="fd --type f --hidden |fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
 alias fzf="fzf --tac --multi --reverse --cycle"
 export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden .'
 export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
