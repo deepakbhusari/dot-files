@@ -175,6 +175,7 @@ unsetopt XTRACE
 
 export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
 
+eval "$(pyenv init -)"
 export TERM=xterm-256color
 #To use the bundled libc++ please add the following LDFLAGS:
 #LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
