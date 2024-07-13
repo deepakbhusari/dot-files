@@ -133,7 +133,7 @@ eval "$(/opt/homebrew/bin/starship init zsh)"
 #eval "$(/opt/homebrew/bin/zoxide init zsh)"
 eval "$(/opt/homebrew/bin/zoxide init zsh)"
 
-eval "$(fzf --zsh)"
+#eval "$(fzf --zsh)"
 
 
 alias zq="zoxide query -ls"
