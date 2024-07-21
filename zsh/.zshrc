@@ -54,6 +54,8 @@ alias gr='grep --color -r '
 alias gri='grep --color -ir '
 alias tl='tldr'
 
+alias tp='top -s 10 -o mem -U $USER'
+
 #This would allow to move between words CMD <- or CMD -> on terminal
 #bindkey -e
 #bindkey '^[[1;9C' forward-word
