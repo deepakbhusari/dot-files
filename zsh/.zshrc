@@ -18,7 +18,7 @@
 #time zsh -i -c echo
 #This is to capture zsh shell performance
 
-export EDITOR=vi
+export EDITOR=nvim
 #PROMPT="%n-%D@%T:~ "
 #PROMPT="[%D@%T %H:%M:%S}] %m-%h-:~ "
 #PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
