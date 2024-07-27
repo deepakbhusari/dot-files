@@ -9,26 +9,32 @@ $directory\
 $git_branch\
 $git_status\
 $git_metrics\
-[](fg:#FCF392 bg:#030B16)\
+[](fg:#8CF392 bg:#030B16)\
 $character\
 """
 
 [directory]
-format = "[ ﱮ $path ]($style)"
-style = "fg:#E4E4E4 bg:#3B76F0"
+#format = "[ ﱮ $path ]($style)"
+format = "[ $path ]($style)"
+#style = "fg:#E4E4E4 bg:#3B76F0"
+style = "fg:#8DFBD2 bg:#1C3A5E"
 
 [git_branch]
 format = '[ $symbol$branch(:$remote_branch) ]($style)'
 symbol = "  "
-style = "fg:#1C3A5E bg:#FCF392"
+#style = "fg:#1C3A5E bg:#FCF392"
+style = "fg:#FCF392 bg:#1C3A5E"
 
 [git_status]
-format = '[$all_status]($style)'
-style = "fg:#1C3A5E bg:#FCF392"
+#format = '[$all_status]($style)'
+#style = "fg:#1C3A5E bg:#FCF392"
+#style = "fg:#1C3A5E bg:#8DFBD2"
 
 [git_metrics]
-format = "([+$added]($added_style))[]($added_style)"
-added_style = "fg:#1C3A5E bg:#FCF392"
+#format = "([+$added]($added_style))[]($added_style)"
+#added_style = "fg:#1C3A5E bg:#FCF392"
+#added_style = "fg:#1C3A5E bg:#8DFBD2"
+
 deleted_style = "fg:bright-red bg:235"
 disabled = false
 
@@ -108,4 +114,8 @@ format = '\[[$symbol$branch]($style)\]'
 [gcloud]
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 
+# ~/.config/starship.toml
+
+# A continuation prompt that displays two filled-in arrows
+continuation_prompt = '▶▶ '
 
