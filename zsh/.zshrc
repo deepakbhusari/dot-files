@@ -70,26 +70,32 @@ alias tree="lsd --tree"
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 
+#ldd -> otool
+alias ldd="echo 'ldd->otool';otool -L"
+
 #alias cat="bat"
 #stow
 alias s="stow -v "
 
 # fzf
-alias e="fd --type f --hidden |fzf |xargs nvim"
-alias f="fd --type f --hidden |fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
+alias e="fd --type f --hidden --exclude .git|fzf |xargs nvim"
+alias f="fd --type f --hidden --exclude .git|fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
 alias fzf="fzf --tac --multi --reverse --cycle"
-export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden .'
+export FZF_DEFAULT_COMMAND='fd --type f --exclude .git --strip-cwd-prefix --color=never --hidden .'
 export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
 export FZF_CTRL_T_OPTS="--preview 'cat {}'"
 
-export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
+
+#exit terminal
+alias x="exit"
 
 #history
 alias h="history 100|grep "
@@ -194,5 +200,7 @@ autoload -Uz compinit && compinit
 complete -C '/usr/local/bin/aws_completer' aws
 
 source <(fzf --zsh)
+
+#source ~/dev/3rdParty/fzf-git.sh/fzf-git.sh
 
 
