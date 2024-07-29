@@ -52,6 +52,8 @@ bindkey -v
 #find files by passing the size parameter , it displays the st_block size
 alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fdd'
 
+#hexdump
+alias hx="hexdump -C"
 
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
