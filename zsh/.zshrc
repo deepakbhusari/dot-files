@@ -55,6 +55,11 @@ alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fd
 #hexdump
 alias hx="hexdump -C"
 
+#netstat
+alias netstat="netstat -talWn"
+
+alias cfs="du -hs . 2>/dev/null"
+
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
