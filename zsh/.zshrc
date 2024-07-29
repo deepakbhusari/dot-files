@@ -47,14 +47,19 @@ set rtp+=/opt/homebrew/opt/fzf
 bindkey -v
 
 #find folders with size greater than 1g
-alias f1g='du -sh .[^.]* * | grep -E "\dG"'
+#alias f1g='du -sh .[^.]* * 2>/dev/null| rg "\dG"'
 
-alias g='grep --color '
-alias gr='grep --color -r '
-alias gri='grep --color -ir '
+#find files by passing the size parameter , it displays the st_block size
+alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fdd'
+
+
+#alias g='grep --color '
+alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
+alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
+#alias gri='grep --color -ir '
 alias tl='tldr'
 
-alias tp='top -s 10 -o mem -U $USER'
+alias t='top -s 10 -o mem -O cpu -U $USER'
 
 #This would allow to move between words CMD <- or CMD -> on terminal
 #bindkey -e
@@ -72,6 +77,13 @@ alias ll="lsd --long --sort time --reverse"
 
 #ldd -> otool
 alias ldd="echo 'ldd->otool';otool -L"
+
+alias st="stat -f '%A %a %n'"
+
+#python 
+alias py="python3"
+alias pyserver="python3 -m http.server 7777"
+
 
 #alias cat="bat"
 #stow
@@ -98,7 +110,7 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 alias x="exit"
 
 #history
-alias h="history 100|grep "
+alias h="history 100|rg "
 alias hv="history|nvim"
 
 #git alias
@@ -146,11 +158,11 @@ alias zq="zoxide query -ls"
 
 se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
 vf() {fzf|xargs -or -I % $EDITOR %;}
-c() {cp -v "$1" "$(awk '{print $2}' ~/.config |grep -vi memes |fzf| sed "s|~|$HOME|")";}
+c() {cp -v "$1" "$(awk '{print $2}' ~/.config |rg -vi memes |fzf| sed "s|~|$HOME|")";}
 
 #tmux configuration
 export TMUX=screen-256color
-alias t="tmux a -t dev || tmux new -t dev"
+alias tx="tmux a -t dev || tmux new -t dev"
 
 PATH=~/.cargo/bin:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
