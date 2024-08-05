@@ -154,6 +154,9 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" this should allow to change the selected value with different value
+vnoremap <leader>l <Esc>:'<,'>s/\(\w.*\)/"\1";
+
 
 " Number 7 : quotes around visual selection
   vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
