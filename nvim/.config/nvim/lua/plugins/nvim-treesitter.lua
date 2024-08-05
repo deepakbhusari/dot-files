@@ -5,27 +5,31 @@ local function setup()
   tr_configs.setup {
     -- ('nvim-treesitter.configs')
     ensure_installed = {
-      "bash",
-      "html",
-      "json",
-      "lua",
-      "css",
-      "scss",
       "c",
+      "cpp",
+      "bash",
+      "css",
+      "html",
       "java",
       "javascript",
+      "json",
       "lua",
       "vim",
       "vimdoc",
       "query",
       "regex",
+      "rust",
+      "scss",
       "markdown",
       "markdown_inline",
+      "perl",
       "python",
       "go",
       "yaml",
       "typescript",
-      "tsx"
+      "typst",
+      "tsx",
+      "zig"
     },
     highlight = {
       select = {
