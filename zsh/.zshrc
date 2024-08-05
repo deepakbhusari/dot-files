@@ -58,7 +58,8 @@ alias hx="hexdump -C"
 #netstat
 alias netstat="netstat -talWn"
 
-alias cfs="du -hs . 2>/dev/null"
+#disk usage
+alias du="du -hs . 2>/dev/null"
 
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
@@ -67,6 +68,9 @@ alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias tl='tldr'
 
 alias t='top -s 10 -o mem -O cpu -U $USER'
+
+#leaks , alternative to valgrind
+alias vg="leaks --atExit --"
 
 #This would allow to move between words CMD <- or CMD -> on terminal
 #bindkey -e
