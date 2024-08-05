@@ -85,6 +85,7 @@ alias vimdiff="/opt/homebrew/bin/nvim -d "
 alias tree="lsd --tree"
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
+alias la="lsd -a --long --sort time --reverse"
 
 #ldd -> otool
 alias ldd="echo 'ldd->otool';otool -L"
