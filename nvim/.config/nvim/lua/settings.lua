@@ -245,6 +245,11 @@ nnoremap ^ 0
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent> s* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> s* "sy:let @/=@s<CR>cgn
+
 "colorscheme habamax
 
 "Toggle highlights
@@ -312,6 +317,7 @@ map('n', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
 
 map('v', '<leader>r', ':%s///g<Left><Left>', { silent = true })
 map('v', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
+
 
 --map(':tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
