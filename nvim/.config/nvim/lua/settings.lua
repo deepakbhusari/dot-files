@@ -307,6 +307,11 @@ map('n', 'Y', 'y$', { silent = true, desc = "Yank to end of line" })
 map('n', '<leader><leader>', '<cmd>tabnew term://zsh<cr>A', { silent = true })
 
 map('n', '<leader>rr', '<c-t><c-c><up><cr><c-t>', { silent = true })
+map('n', '<leader>r', ':%s///g<Left><Left>', { silent = true })
+map('n', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
+
+map('v', '<leader>r', ':%s///g<Left><Left>', { silent = true })
+map('v', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
 
 --map(':tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 -- :tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
