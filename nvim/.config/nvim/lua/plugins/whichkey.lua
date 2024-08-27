@@ -1,6 +1,7 @@
 local function setup()
   local wk = require 'which-key'
 
+  -- plugins={ marks=true, registers=true, },
   --  wk.register({
   --    f = {
   --      name = 'file', -- optional group name
