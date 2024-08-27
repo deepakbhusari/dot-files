@@ -14,7 +14,8 @@ local opt = vim.opt
 
 --mappings functions in lua
 local function map(kind, lhs, rhs, opts)
-  vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+--  vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+vim.keymap.set(kind, lhs, rhs, opts)
   -- example vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap=true})
 end
 
@@ -107,9 +108,11 @@ highlight ColorColumn ctermbg=0 guibg=grey
 
 "colorscheme torte
 
-let g:tokyonight_style = 'storm' " available: night, storm
-let g:tokyonight_enable_italic = 1
+"let g:tokyonight_style = 'storm' " available: night, storm
+"let g:tokyonight_enable_italic = 1
 "colorscheme tokyonight
+
+"colorscheme nightfly
 
 "mappings
 
@@ -286,8 +289,8 @@ let &grepprg='rg --vimgrep --smart-case -n  $*'
 
 ]]
 
--- Intuitive increment and decrement
 -- This is for map function for neovim
+-- Intuitive increment and decrement
 map('n', '+', '<c-a>', silentnoremap)
 map('n', '-', '<c-x>', silentnoremap)
 
@@ -324,3 +327,16 @@ map('v', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
 
 map("n", "<leader>p", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { silent = true, desc = "Replace word under cursor" })
+
+--map x so it does not overwrite the clipboard
+map("n", "x", '"_x',silentnoremap)
+
+-- Select all
+map("n", "<C-a>", "gg<S-v>G",{silent = true})
+
+-- Save file and quit
+map("n", "<Leader>w", ":update<Return>", {silent = true})
+map("n", "<Leader>q", ":quit<Return>", {silent = true})
+map("n", "<Leader>Q", ":qa<Return>", {silent = true})
+
+
