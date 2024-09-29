@@ -60,6 +60,7 @@ alias netstat="netstat -talWn"
 
 #disk usage
 alias du="du -hs . 2>/dev/null"
+alias d=dust -B 
 
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
@@ -226,5 +227,8 @@ complete -C '/usr/local/bin/aws_completer' aws
 source <(fzf --zsh)
 
 #source ~/dev/3rdParty/fzf-git.sh/fzf-git.sh
+
+bindkey -v
+
 
 
