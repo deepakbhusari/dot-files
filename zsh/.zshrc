@@ -155,7 +155,9 @@ alias gs='git status'
 alias gsh='git show'
 alias gu='git push'
 
-alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
+#alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
+alias ff='fd -t f |fzf|pbcopy'
+alias ffd='fd -t d |fzf|pbcopy'
 #alias fi='vi $(find . -type f -path "*/.*"|fzf)'
 
 #export SHELL=~/nix-profile/bin/zsh
