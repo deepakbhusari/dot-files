@@ -176,7 +176,7 @@ vf() {fzf|xargs -or -I % $EDITOR %;}
 cpvv() {cp -v "$1" "$(awk '{print $2}' ~/.config |rg -vi memes |fzf| sed "s|~|$HOME|")";}
 
 #compile program
-c() {clang -std=c2x -Wall -pedantic $*}
+c() {clang -std=c2x -Wall -Wextra -pedantic $*}
 
 #sed -> sd replacementChar filename
 sd() {sed "s/\(.*\) \(.*\)/\1$1 \2/" $2}
