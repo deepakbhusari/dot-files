@@ -1,5 +1,5 @@
-# CodeWhisperer pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
+# Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 #PROMPT = '%1~ %# '
 
 
@@ -60,7 +60,7 @@ alias netstat="netstat -talWn"
 
 #disk usage
 alias du="du -hs . 2>/dev/null"
-alias d=dust -B 
+alias d=dust -T 8 -B 
 
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
@@ -162,7 +162,7 @@ alias ffd='fd -t d |fzf|pbcopy'
 
 #export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
-export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:"
+export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:~/.config/emacs/bin:"
 
 eval "$(/opt/homebrew/bin/starship init zsh)"
 #eval "$(/opt/homebrew/bin/zoxide init zsh)"
@@ -173,7 +173,16 @@ alias zq="zoxide query -ls"
 
 se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
 vf() {fzf|xargs -or -I % $EDITOR %;}
-c() {cp -v "$1" "$(awk '{print $2}' ~/.config |rg -vi memes |fzf| sed "s|~|$HOME|")";}
+cpvv() {cp -v "$1" "$(awk '{print $2}' ~/.config |rg -vi memes |fzf| sed "s|~|$HOME|")";}
+
+#compile program
+c() {clang -std=c2x -Wall -pedantic $*}
+
+#sed -> sd replacementChar filename
+sd() {sed "s/\(.*\) \(.*\)/\1$1 \2/" $2}
+
+#sed break the name in string
+sdb() {sed "s/\(num\)\(.*r\)/\1->\2/" $2}
 
 #tmux configuration
 export TMUX=screen-256color
@@ -213,13 +222,7 @@ export TERM=xterm-256color
 #To use the bundled libc++ please add the following LDFLAGS:
 #LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-# CodeWhisperer post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
-
-
-PATH=~/.console-ninja/.bin:$PATH
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"PATH=~/.console-ninja/.bin:$PATH
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
@@ -232,5 +235,7 @@ source <(fzf --zsh)
 
 bindkey -v
 
-
+# Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] 
+&& builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
