@@ -1,121 +1,31 @@
-format = """\
-[](bg:#030B16 fg:#7DF9AA)\
-[󰀵 ](bg:#7DF9AA fg:#090c0c)\
-[](fg:#7DF9AA bg:#1C3A5E)\
-$time\
-[](fg:#1C3A5E bg:#3B76F0)\
-$directory\
-[](fg:#3B76F0 bg:#FCF392)\
-$git_branch\
-$git_status\
-$git_metrics\
-[](fg:#8CF392 bg:#030B16)\
-$character\
-"""
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
 
-[directory]
-#format = "[ ﱮ $path ]($style)"
-format = "[ $path ]($style)"
-#style = "fg:#E4E4E4 bg:#3B76F0"
-style = "fg:#8DFBD2 bg:#1C3A5E"
+#format = '''
+#$kubernetes $aws $python
+#$directory $git_branch 
+#[](fg:#8CF392 bg:#030B16) $character
+#'''
 
-[git_branch]
-format = '[ $symbol$branch(:$remote_branch) ]($style)'
-symbol = "  "
-#style = "fg:#1C3A5E bg:#FCF392"
-style = "fg:#FCF392 bg:#1C3A5E"
+# Move the directory to the second line
+#format = '$all$directory$character$hostname'
+#format = '$all$hostname$username$localip'
 
-[git_status]
-#format = '[$all_status]($style)'
-#style = "fg:#1C3A5E bg:#FCF392"
-#style = "fg:#1C3A5E bg:#8DFBD2"
+continuation_prompt = '▶▶ '
 
-[git_metrics]
-#format = "([+$added]($added_style))[]($added_style)"
-#added_style = "fg:#1C3A5E bg:#FCF392"
-#added_style = "fg:#1C3A5E bg:#8DFBD2"
-
-deleted_style = "fg:bright-red bg:235"
-disabled = false
-
-[hg_branch]
-format = "[ $symbol$branch ]($style)"
-symbol = " "
-
-[cmd_duration]
-min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
-format = "[  $duration ]($style)"
-style = "fg:bright-white bg:18"
-#format = '\[[⏱ $duration]($style)\]'
-
-[character]
-success_symbol = '[ ➜](bold green) '
-error_symbol = '[ ✗](#E84D44) '
-
-[time]
-disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
-
-
-[aws]
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
-
-[bun]
-format = '\[[$symbol($version)]($style)\]'
-
-[c]
-format = '\[[$symbol($version(-$name))]($style)\]'
-
-[cmake]
-format = '\[[$symbol($version)]($style)\]'
-
-
-[cobol]
-format = '\[[$symbol($version)]($style)\]'
-
-[conda]
-format = '\[[$symbol$environment]($style)\]'
-
-[crystal]
-format = '\[[$symbol($version)]($style)\]'
-
-[daml]
-format = '\[[$symbol($version)]($style)\]'
-
-[dart]
-format = '\[[$symbol($version)]($style)\]'
-
-[deno]
-format = '\[[$symbol($version)]($style)\]'
-
-[docker_context]
-format = '\[[$symbol$context]($style)\]'
-
-[dotnet]
-format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
-
-[elixir]
-format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
-
-[elm]
-format = '\[[$symbol($version)]($style)\]'
-
-[erlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[fennel]
-format = '\[[$symbol($version)]($style)\]'
-
-[fossil_branch]
-format = '\[[$symbol$branch]($style)\]'
-
-[gcloud]
-format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+# Inserts a blank line between shell prompts
+add_newline = false
 
 # ~/.config/starship.toml
 
-# A continuation prompt that displays two filled-in arrows
-continuation_prompt = '▶▶ '
+[hostname]
+ssh_only = false
+#detect_env_vars = ['!TMUX', 'SSH_CONNECTION']
+#disabled = false
+
+# ~/.config/starship.toml
+
+[directory]
+truncation_length = 8
+truncation_symbol = '…/'
 
