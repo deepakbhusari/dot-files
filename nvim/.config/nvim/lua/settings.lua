@@ -237,7 +237,7 @@ vnoremap <C-c> "+y
 inoremap <C-v> <C-r>+
 
 " nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
+nnoremap <C-p> :bprev<CR>
 
 nnoremap gb :ls<CR>:b<Space>
 nnoremap 0 ^
