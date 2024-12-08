@@ -11,12 +11,14 @@ $git_branch\
 $git_state\
 $git_status\
 $date\
+$hostname\
 $line_break\
 $character
 [](fg:#8CF392 bg:#030B16) $character
 """
 
-right_format = """$all"""
+#right_format = """$all"""
+right_format = """$host"""
 
 palette = "catppuccin_mocha"
 
@@ -224,7 +226,7 @@ disabled = true
 
 [character]
 disabled = false
-success_symbol = '[𝘹](bold fg:green)'
+success_symbol = '[√](bold fg:green)'
 error_symbol = '[𝘹](bold fg:red)'
 vimcmd_symbol = '[](bold fg:creen)'
 vimcmd_replace_one_symbol = '[](bold fg:purple)'
