@@ -13,7 +13,7 @@ $git_status\
 $date\
 $hostname\
 $line_break\
-$character
+$aws
 [](fg:#8CF392 bg:#030B16) $character
 """
 
@@ -232,4 +232,18 @@ vimcmd_symbol = '[](bold fg:creen)'
 vimcmd_replace_one_symbol = '[](bold fg:purple)'
 vimcmd_replace_symbol = '[](bold fg:purple)'
 vimcmd_visual_symbol = '[](bold fg:lavender)'
+
+# ~/.config/starship.toml
+
+[aws]
+#format = '[$symbol($profile )(\($region\) )]($style)'
+format = '[$region]($style)'
+#style = 'bold blue'
+symbol = '🅰 '
+[aws.region_aliases]
+ap-southeast-2 = 'au'
+#us-east-1 = 'va'
+[aws.profile_aliases]
+#CompanyGroupFrobozzOnCallAccess = 'Frobozz'
+
 
