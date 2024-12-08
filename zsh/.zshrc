@@ -19,6 +19,11 @@
 #This is to capture zsh shell performance
 
 export EDITOR=nvim
+export SAVEHIST=10000
+export HISTSIZE=10000
+export HISTFILE="${HOME}/.zsh_history"
+export HISTCONTROL=ignorespace:ignoredups
+
 #PROMPT="%n-%D@%T:~ "
 #PROMPT="[%D@%T %H:%M:%S}] %m-%h-:~ "
 #PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
@@ -87,6 +92,7 @@ alias tree="lsd --tree"
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 alias la="lsd -a --long --sort time --reverse"
+alias l="ls -alFr"
 
 #ldd -> otool
 alias ldd="echo 'ldd->otool';otool -L"
@@ -103,18 +109,22 @@ alias pyserver="python3 -m http.server 7777"
 alias s="stow -v "
 
 # fzf
-alias e="fd --type f --hidden --exclude .git|fzf |xargs nvim"
-alias f="fd --type f --hidden --exclude .git|fzf --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
+alias e="fd --type f --hidden --exclude .git|fzf -e|xargs nvim"
+alias f="fd --type f --hidden --exclude .git|fzf -e --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
+alias v="fzf -e|xargs nvim"
+#fzf and vi
+#vi -o `fzf -e`
 alias fzf="fzf --tac --multi --reverse --cycle"
-export FZF_DEFAULT_COMMAND='fd --type f --exclude .git --strip-cwd-prefix --color=never --hidden .'
+export FZF_DEFAULT_COMMAND='fd --type f --exclude .git --exclude node_modules --strip-cwd-prefix --color=never --hidden .'
 export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
 export FZF_CTRL_T_OPTS="--preview 'cat {}'"
 
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+export FZF_ALT_C_OPTS="--preview 'ls -ltrh {} | head -50'"
 bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
@@ -156,7 +166,7 @@ alias gsh='git show'
 alias gu='git push'
 
 #alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
-alias ff='fd -t f |fzf|pbcopy'
+alias ff='fd -t f $1 |fzf|pbcopy'
 alias ffd='fd -t d |fzf|pbcopy'
 #alias fi='vi $(find . -type f -path "*/.*"|fzf)'
 
@@ -234,6 +244,8 @@ source <(fzf --zsh)
 #source ~/dev/3rdParty/fzf-git.sh/fzf-git.sh
 
 bindkey -v
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Q post block. Keep at the bottom of this file.
 #[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] 
