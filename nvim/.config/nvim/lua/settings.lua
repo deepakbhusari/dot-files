@@ -155,6 +155,9 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+"Mappings to move lines
+
+
 " this should allow to change the selected value with different value
 vnoremap <leader>l <Esc>:'<,'>s/\(\w.*\)/"\1";
 
@@ -315,6 +318,10 @@ map('n', 'Y', 'y$', { silent = true, desc = 'Yank to end of line' })
 --terminal
 map('n', '<leader><leader>', '<cmd>tabnew term://zsh<cr>A', { silent = true })
 
+map('n', '<leader>o', ':FzfLua files<cr>', { silent = true })
+map('n', '<leader>g', ':FzfLua live_grep<cr>', { silent = true })
+map('n', '<leader>b', ':FzfLua buffers<cr>', { silent = true })
+
 map('n', '<leader>rr', '<c-t><c-c><up><cr><c-t>', { silent = true })
 map('n', '<leader>r', ':%s///g<Left><Left>', { silent = true })
 map('n', '<leader>rc', ':%s///gc<Left><Left><Left>', { silent = true })
@@ -337,3 +344,10 @@ map('n', '<C-a>', 'gg<S-v>G', { silent = true })
 map('n', '<Leader>w', ':update<Return>', { silent = true })
 map('n', '<Leader>q', ':quit<Return>', { silent = true })
 map('n', '<Leader>Q', ':qa<Return>', { silent = true })
+
+-- ripgrep
+map('n', '<C-g>', ':!rg ', { silent = true })
+
+-- "Mappings for mini files
+map('n', '<c-k>', ':lua MiniFiles.open()', { silent = false })
+
