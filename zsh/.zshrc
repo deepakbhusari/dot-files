@@ -99,10 +99,29 @@ alias ldd="echo 'ldd->otool';otool -L"
 
 alias st="stat -f '%A %a %n'"
 
+#podman process list
+alias pps="podman ps -s -a"
+#podman image list
+alias pil="podman image ls"
+#podman container list
+alias pcl="podman container ls -a"
+#podman search
+alias psi="podman search "
+alias pitree="podman image tree "
+#podman remove image
+alias pri="podman rmi "
+#podman remove container
+alias prc="podman rm "
+#podman system df
+alias pdf="podman system df "
+# remove unused data (stopped containers, stopped pods and dangling images)
+alias pprune="podman system prune "
+alias pins="podman inspect "
+alias prunc="podman run -it  "
+
 #python 
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
-
 
 #alias cat="bat"
 #stow
@@ -167,7 +186,7 @@ alias gu='git push'
 
 #alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 alias ff='fd -t f $1 |fzf|pbcopy'
-alias ffd='fd -t d |fzf|pbcopy'
+alias dir='fd -t d |fzf|pbcopy'
 #alias fi='vi $(find . -type f -path "*/.*"|fzf)'
 
 #export SHELL=~/nix-profile/bin/zsh
