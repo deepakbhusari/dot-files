@@ -200,5 +200,12 @@ let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
     endtry
 endif
 
+"Allow cursor highlighting
+"hi CursorColumn cterm=NONE ctermbg=0
+"sets vertical column
+nnoremap <Leader>c :set cursorcolumn!<CR>
+"sets horizontal cursor line
+set cursorline
+
 autocmd FileType c,cpp setlocal equalprg=clang-format
 
