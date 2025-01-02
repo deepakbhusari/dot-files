@@ -209,3 +209,18 @@ set cursorline
 
 autocmd FileType c,cpp setlocal equalprg=clang-format
 
+"Function to set the background for vim
+set background=dark
+function! ToggleBG()
+  let s:tbg = &background
+  if s:tbg == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
+
+endfunction
+
+noremap <leader>bg : call ToggleBG()<CR>
+
+
