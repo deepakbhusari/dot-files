@@ -45,59 +45,41 @@ export HISTCONTROL=ignorespace:ignoredups
 # Load Antigen configurations
 #antigen init ~/.antigenrc
 
-#fzf setup
-set rtp+=/opt/homebrew/opt/fzf
 
 # Enable vi mode
 bindkey -v
 
-#find folders with size greater than 1g
-#alias f1g='du -sh .[^.]* * 2>/dev/null| rg "\dG"'
-
-#find files by passing the size parameter , it displays the st_block size
-alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fdd'
-
-#hexdump
-alias hx="hexdump -C"
-
-#netstat
-alias netstat="netstat -talWn"
-
 #disk usage
 alias du="du -hs . 2>/dev/null"
-alias d=dust -T 8 -B 
-
+alias d=dust -T 8 -B
+alias dir_size_git="fdu() {du -hsx .[^.]* |rg \$1}; fdu"
+dir_size() {du -hsx $1}
+#find folders with size greater than 1g
+#alias f1g='du -sh .[^.]* * 2>/dev/null| rg "\dG"'
+#find files by passing the size parameter , it displays the st_block size
+alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fdd'
 #alias g='grep --color '
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
 #alias gri='grep --color -ir '
-alias tl='tldr'
 
-alias t='top -s 10 -o mem -O cpu -U $USER'
+#hexdump
+alias hx="hexdump -C"
+#history
+alias h="history 100|rg "
+alias hv="history|nvim"
 
-#leaks , alternative to valgrind
-alias vg="leaks --atExit --"
 
-#This would allow to move between words CMD <- or CMD -> on terminal
-#bindkey -e
-#bindkey '^[[1;9C' forward-word
-#bindkey '^[[1;9D' backward-word
-
-#alias v=~/.nix-profile/bin/vi
-#alias vi=~/.nix-profile/bin/nvim
-alias vi="/opt/homebrew/bin/nvim -p "
-alias vimdiff="/opt/homebrew/bin/nvim -d "
 #alias ll="ls -al"
-alias tree="lsd --tree"
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 alias la="lsd -a --long --sort time --reverse"
 alias l="ls -alFr"
-
 #ldd -> otool
 alias ldd="echo 'ldd->otool';otool -L"
 
-alias st="stat -f '%A %a %n'"
+#netstat
+alias netstat="netstat -talWn"
 
 #podman process list
 alias pps="podman ps -s -a"
@@ -126,14 +108,34 @@ alias pyserver="python3 -m http.server 7777"
 #alias cat="bat"
 #stow
 alias s="stow -v "
+alias st="stat -f '%A %a %n'"
 
+alias tree="lsd --tree"
+alias tl='tldr'
+alias t='top -s 10 -o mem -O cpu -U $USER'
 # fzf
 alias e="fd --type f --hidden --exclude .git|fzf -e|xargs nvim"
 alias f="fd --type f --hidden --exclude .git|fzf -e --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
 alias v="fzf -e|xargs nvim"
+alias fzf="fzf --tac --multi --reverse --cycle"
+
+#leaks , alternative to valgrind
+alias vg="leaks --atExit --"
+
+alias vi="/opt/homebrew/bin/nvim -p "
+alias vimdiff="/opt/homebrew/bin/nvim -d "
+#exit terminal
+alias x="exit"
+
+#This would allow to move between words CMD <- or CMD -> on terminal
+#bindkey -e
+#bindkey '^[[1;9C' forward-word
+#bindkey '^[[1;9D' backward-word
+
+#alias v=~/.nix-profile/bin/vi
+#alias vi=~/.nix-profile/bin/nvim
 #fzf and vi
 #vi -o `fzf -e`
-alias fzf="fzf --tac --multi --reverse --cycle"
 export FZF_DEFAULT_COMMAND='fd --type f --exclude .git --exclude node_modules --strip-cwd-prefix --color=never --hidden .'
 export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
 
@@ -148,16 +150,11 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
 
-#exit terminal
-alias x="exit"
-
-#history
-alias h="history 100|rg "
-alias hv="history|nvim"
-
+alias dr='doom run '
 #git alias
 alias gaa='git add --all'
 alias gau='git add --update'
+alias gap='git add --patch' #similar to interactive
 alias gb='git branch'
 alias gba='git branch -a'
 alias gc='git commit -v'
@@ -183,6 +180,9 @@ alias gp='git pull'
 alias gs='git status'
 alias gsh='git show'
 alias gu='git push'
+alias gwl='git worktree list'
+gwa(){git worktree add -b $1 "../$1" $2}
+gwr() {git worktree remove $1}
 
 #alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
 alias ff='fd -t f $1 |fzf|pbcopy'
@@ -191,7 +191,10 @@ alias dir='fd -t d |fzf|pbcopy'
 
 #export SHELL=~/nix-profile/bin/zsh
 # Add Visual Studio Code (code)
-export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:~/.config/emacs/bin:"
+export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$HOME/.config/emacs/bin:"
+
+#fzf setup
+set rtp+=/opt/homebrew/opt/fzf
 
 eval "$(/opt/homebrew/bin/starship init zsh)"
 #eval "$(/opt/homebrew/bin/zoxide init zsh)"
@@ -238,6 +241,8 @@ esac
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+
 
 #This is to capture zsh shell performance
 unsetopt XTRACE
