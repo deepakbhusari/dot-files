@@ -4,7 +4,6 @@ command_timeout = 1000
 
 
 format = """
- ➜\
 $directory\
 ${custom.giturl}\
 $git_branch\
@@ -117,10 +116,11 @@ RedHatEnterprise = "󱄛"
 #format = '[ $user ]($style)'
 
 [directory]
-truncation_length = 8
-truncation_symbol = '…/'
-style = "sapphire"
-format = "[ $path ]($style)"
+truncation_length = 18
+#truncation_symbol = '…/'
+#style = "sapphire"
+#format = "[ $path ]($style)"
+truncate_to_repo = false
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -128,6 +128,9 @@ format = "[ $path ]($style)"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+
+[direnv]
+disabled = false
 
 [os]
 disabled = true
