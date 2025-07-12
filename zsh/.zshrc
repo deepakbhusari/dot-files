@@ -275,3 +275,5 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] 
 #&& builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
+eval "$(/opt/homebrew/bin/mise activate zsh)"
+
