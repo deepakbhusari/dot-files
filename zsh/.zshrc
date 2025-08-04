@@ -176,7 +176,7 @@ alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s
 alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
 alias glr='git log --pretty=format:"%C(green)%H\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
 alias glt='git ls-tree' #pass the hash-object
-alias gp='git pull'
+alias gp='git pull --rebase'
 alias gs='git status'
 alias gsh='git show'
 alias gu='git push'
