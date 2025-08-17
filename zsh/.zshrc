@@ -150,7 +150,7 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
 
-alias dr='doom run '
+alias dr='doom emacs '
 #git alias
 alias gaa='git add --all'
 alias gau='git add --update'
