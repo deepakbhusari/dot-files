@@ -150,7 +150,7 @@ bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
 
-alias dr='doom emacs '
+alias de='doom emacs '
 #git alias
 alias gaa='git add --all'
 alias gau='git add --update'
@@ -171,6 +171,7 @@ alias ge='git clone'
 alias ge1='git clone --depth=1'
 alias gho='git hash-object -w' #pass the file-name
 alias gl='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
+alias gll='git log --all --decorate --oneline --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
 alias gld='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
 alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
 alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
