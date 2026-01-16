@@ -63,6 +63,8 @@ alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
 #alias gri='grep --color -ir '
 
+#fold file for given width,usage: fld width inputfile outputfile
+fld() {fold -s -w "$1" "$2" > "$3"}
 #hexdump
 alias hx="hexdump -C"
 #history
