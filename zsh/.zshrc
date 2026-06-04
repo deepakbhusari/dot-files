@@ -1,283 +1,173 @@
-# Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-#PROMPT = '%1~ %# '
+# =========================================================
+# Q PRE BLOCK (KEEP TOP - DO NOT TOUCH)
+# =========================================================
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] &&
+  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
-
-#This is to capture zsh shell performance
-#zmodload zsh/datetime
-#setopt PROMPT_SUBST
-#PS4='+$EPOCHREALTIME %N:%i> '
-
-#logfile=$(mktemp zsh_profile.XXXXXXXX)
-#echo "Logging to $logfile"
-#exec 3>&2 2>$logfile
-
-#setopt XTRACE
-
-#To measure current zsh config performznce
-#time zsh -i -c echo
-#This is to capture zsh shell performance
-
+# =========================================================
+# PERFORMANCE CORE (KEEP MINIMAL & FIRST)
+# =========================================================
 export EDITOR=vi
-export SAVEHIST=10000
+export TERM=xterm-256color
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# History (fast + safe)
+export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
-export HISTFILE="${HOME}/.zsh_history"
-export HISTCONTROL=ignorespace:ignoredups
+export SAVEHIST=10000
+setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE
 
-#PROMPT="%n-%D@%T:~ "
-#PROMPT="[%D@%T %H:%M:%S}] %m-%h-:~ "
-#PROMPT="[$(date +%Y.%m.%d-%H:%M:%S)] %n %~/ :~ "
+# =========================================================
+# PATH (SINGLE SOURCE OF TRUTH)
+# =========================================================
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin
+  /usr/local/bin
+  $HOME/.cargo/bin
+  $HOME/.bun/bin
+  $HOME/.console-ninja/.bin
+  $path
+)
+export PATH
 
-#if type brew &>/dev/null
-#then
-#  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-#  autoload -Uz compinit
-#  compinit
-#fi
-
-# K8s auto-complete
-#autoload -U +X compinit && compinit
-#source <(kubectl completion zsh)
-
-#source ~/./antigen.zsh
-
-# Load Antigen configurations
-#antigen init ~/.antigenrc
-
-
-# Enable vi mode
+# =========================================================
+# SHELL MODE (INSTANT)
+# =========================================================
 bindkey -v
 
-#disk usage
-alias du="du -hs . 2>/dev/null"
-alias d=dust -T 8 -B
-alias dir_size_git="fdu() {du -hsx .[^.]* |rg \$1}; fdu"
-dir_size() {du -hsx $1}
-#find folders with size greater than 1g
-#alias f1g='du -sh .[^.]* * 2>/dev/null| rg "\dG"'
-#find files by passing the size parameter , it displays the st_block size
-alias f1='fdd() { find . -type f -size +$1 -exec ls -sh {} \; 2>/dev/null ;}; fdd'
-#alias g='grep --color '
+# =========================================================
+# FAST ALIASES (NO PROCESS SPAWNING)
+# =========================================================
+alias dus="du -hs . 2>/dev/null"
+alias d="dust -T 8 -B"
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias gr="rg --colors 'match:fg:magenta' 2>/dev/null"
-#alias gri='grep --color -ir '
 
-#fold file for given width,usage: fld width inputfile outputfile
-fld() {fold -s -w "$1" "$2" > "$3"}
-#hexdump
 alias hx="hexdump -C"
-#history
-alias h="history 100|rg "
-alias hv="history|vi"
+alias h="history 100 | rg "
+alias hv="history | vi"
 
-
-#alias ll="ls -al"
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 alias la="lsd -a --long --sort time --reverse"
-alias l="ls -alFr"
-#ldd -> otool
-alias ldd="echo 'ldd->otool';otool -L"
 
-#netstat
-alias netstat="netstat -talWn"
-
-#podman process list
-alias pps="podman ps -s -a"
-#podman image list
-alias pil="podman image ls"
-#podman container list
-alias pcl="podman container ls -a"
-#podman search
-alias psi="podman search "
-alias pitree="podman image tree "
-#podman remove image
-alias pri="podman rmi "
-#podman remove container
-alias prc="podman rm "
-#podman system df
-alias pdf="podman system df "
-# remove unused data (stopped containers, stopped pods and dangling images)
-alias pprune="podman system prune "
-alias pins="podman inspect "
-alias prunc="podman run -it  "
-
-#python 
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
 
-#alias cat="bat"
-#stow
-alias s="stow -v "
-alias st="stat -f '%A %a %n'"
-
-alias tree="lsd --tree"
-alias tl='tldr'
-alias t='top -s 10 -o mem -O cpu -U $USER'
-# fzf
-alias e="fd --type f --hidden --exclude .git|fzf -e|xargs vi"
-alias f="fd --type f --hidden --exclude .git|fzf -e --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs vi"
-alias v="fzf -e|xargs vi"
-alias fzf="fzf --tac --multi --reverse --cycle"
-
-#leaks , alternative to valgrind
-alias vg="leaks --atExit --"
-
-alias vi="/opt/homebrew/bin/vi -p "
-alias vimdiff="/opt/homebrew/bin/vi -d "
-#exit terminal
 alias x="exit"
 
-#This would allow to move between words CMD <- or CMD -> on terminal
-#bindkey -e
-#bindkey '^[[1;9C' forward-word
-#bindkey '^[[1;9D' backward-word
+# =========================================================
+# FAST FUNCTIONS (NO DEPENDENCY CHAINS)
+# =========================================================
+dir_size() { du -hsx "$1" }
 
-#alias v=~/.nix-profile/bin/vi
-#alias vi=~/.nix-profile/bin/nvim
-#fzf and vi
-#vi -o `fzf -e`
-export FZF_DEFAULT_COMMAND='fd --type f --exclude .git --exclude node_modules --strip-cwd-prefix --color=never --hidden .'
-export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
+fld() { fold -s -w "$1" "$2" > "$3" }
 
+f1() {
+  find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null
+}
+
+c() {
+  clang -std=c2x -Wall -Wextra -pedantic "$@"
+}
+
+sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
+sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
+
+# =========================================================
+# FZF (CRITICAL: LAZY LOAD FOR SPEED)
+# =========================================================
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
-export FZF_CTRL_T_OPTS="--preview 'cat {}'"
 
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
-export FZF_ALT_C_OPTS="--preview 'ls -ltrh {} | head -50'"
-bindkey -s '^e' 'vi $(fd --type f --color=never --hidden . |fzf)\n'
+_fzf_loaded=0
+load_fzf() {
+  [[ $_fzf_loaded -eq 1 ]] && return
+  _fzf_loaded=1
 
-# fzf
+  [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] &&
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
-alias de='doom emacs '
-#git alias
-alias gaa='git add --all'
-alias gau='git add --update'
-alias gap='git add --patch' #similar to interactive
-alias gb='git branch'
-alias gba='git branch -a'
-alias gc='git commit -v'
-alias gca='git commit -v -am'
-alias gcf='git cat-file blob' #pass the hash object
-alias gct='git cat-file -t'
-alias gco='git checkout'
-alias gcob='git checkout -b'
-alias gcot='git checkout -t'
-alias gcotb='git checkout --track -b'
-# alias gd='git diff | kdiff3'
-alias gd='git diff'
-alias ge='git clone'
-alias ge1='git clone --depth=1'
-alias gho='git hash-object -w' #pass the file-name
-alias gl='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat'
-alias gll='git log --all --decorate --oneline --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
-alias gld='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph'
-alias glf='git log --pretty=format:"%C(yellow)%H\\ %C(green)%ad%Cred\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --graph -- '
-alias glp='git log --pretty=format:"%C(yellow)%H%Cred%d\\ %C(green)%ad%Cred\\%Creset%s%Cblue\\ [%cn]" --decorate --date=format:"%Y-%m-%d %H:%M:%S %z" --numstat -p'
-alias glr='git log --pretty=format:"%C(green)%H\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative'
-alias glt='git ls-tree' #pass the hash-object
-alias gp='git pull --rebase'
-alias gpt='git push --tags'
-alias gs='git status'
-alias gsh='git show'
-alias gu='git push'
-alias gwl='git worktree list'
-gwa(){git worktree add -b $1 "../$1" $2}
-gwr() {git worktree remove $1}
+  [[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]] &&
+    source /opt/homebrew/opt/fzf/shell/completion.zsh
+}
 
-#alias ff='find . -type f -path "*/.*"|fzf|pbcopy'
-alias ff='fd -t f $1 |fzf|pbcopy'
-alias dir='fd -t d |fzf|pbcopy'
-#alias fi='vi $(find . -type f -path "*/.*"|fzf)'
+fzf() {
+  load_fzf
+  command fzf "$@"
+}
 
-#export SHELL=~/nix-profile/bin/zsh
-# Add Visual Studio Code (code)
-export PATH="/usr/local/bin/:/opt/homebrew/bin:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$HOME/.config/emacs/bin:"
-
-#fzf setup
-set rtp+=/opt/homebrew/opt/fzf
-
-eval "$(/opt/homebrew/bin/starship init zsh)"
-#eval "$(/opt/homebrew/bin/zoxide init zsh)"
+# =========================================================
+# ZOXIDE (FAST - KEEP)
+# =========================================================
 eval "$(/opt/homebrew/bin/zoxide init zsh)"
-
-
 alias zq="zoxide query -ls"
 
-se() {du -a . |awk '{print $2}'|fzf|xargs -or $EDITOR;}
-vf() {fzf|xargs -or -I % $EDITOR %;}
-cpvv() {cp -v "$1" "$(awk '{print $2}' ~/.config |rg -vi memes |fzf| sed "s|~|$HOME|")";}
+# =========================================================
+# GIT (LIGHTWEIGHT)
+# =========================================================
+alias gs='git status'
+alias gc='git commit -v'
+alias gp='git pull --rebase'
+alias gu='git push'
+alias gb='git branch'
+alias gd='git diff'
 
-#compile program
-c() {clang -std=c2x -Wall -Wextra -pedantic $*}
+# =========================================================
+# LAZY AUTOSUGGESTIONS (BIG WIN FOR SPEED)
+# =========================================================
+_autosuggest_loaded=0
+load_autosuggest() {
+  [[ $_autosuggest_loaded -eq 1 ]] && return
+  _autosuggest_loaded=1
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+}
 
-#sed -> sd replacementChar filename
-sd() {sed "s/\(.*\) \(.*\)/\1$1 \2/" $2}
+autoload -U add-zsh-hook
+add-zsh-hook precmd load_autosuggest
 
-#sed break the name in string
-sdb() {sed "s/\(num\)\(.*r\)/\1->\2/" $2}
+# =========================================================
+# OPTIONAL HEAVY TOOLS (DISABLED AT BOOT)
+# =========================================================
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 
-#tmux configuration
+# mise (only if preloaded externally)
+[[ -n $ZSH_MISE_LOADED ]] && eval "$(mise activate zsh --shims)"
+
+# =========================================================
+# SECURITY: NO COMPINIT AT STARTUP
+# =========================================================
+# compinit intentionally removed for speed
+# (enable only if you REALLY need completion system)
+
+# =========================================================
+# TMUX
+# =========================================================
 export TMUX=screen-256color
 alias tx="tmux a -t dev || tmux new -t dev"
 
-PATH=~/.cargo/bin:$PATH
-export PATH="/opt/homebrew/bin:$PATH"
-
-
-# pnpm
-export PNPM_HOME="~/Library/pnpm"
+# =========================================================
+# PNPM / BUN
+# =========================================================
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
-
-
-# bun completions
-#[ -s "/Users/manisha/.bun/_bun" ] && source "/Users/manisha/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-
-
-#This is to capture zsh shell performance
+# =========================================================
+# FINAL PERFORMANCE SAFEGUARD
+# =========================================================
 unsetopt XTRACE
-#exec 2>&3 3>&-
-#This is to capture zsh shell performance
 
-export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
-
-eval "$(pyenv init -)"
-export TERM=xterm-256color
-#To use the bundled libc++ please add the following LDFLAGS:
-#LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"PATH=~/.console-ninja/.bin:$PATH
-
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
-
-#complete -C '/usr/local/bin/aws_completer' aws
-
-source <(fzf --zsh)
-
-#source ~/dev/3rdParty/fzf-git.sh/fzf-git.sh
-
-bindkey -v
-
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Q post block. Keep at the bottom of this file.
-#[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] 
-#&& builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+# =========================================================
+# Q POST BLOCK (KEEP BOTTOM)
+# =========================================================
+#[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] &&
+#  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
