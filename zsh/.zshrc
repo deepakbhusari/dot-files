@@ -18,7 +18,7 @@
 #time zsh -i -c echo
 #This is to capture zsh shell performance
 
-export EDITOR=nvim
+export EDITOR=vi
 export SAVEHIST=10000
 export HISTSIZE=10000
 export HISTFILE="${HOME}/.zsh_history"
@@ -69,7 +69,7 @@ fld() {fold -s -w "$1" "$2" > "$3"}
 alias hx="hexdump -C"
 #history
 alias h="history 100|rg "
-alias hv="history|nvim"
+alias hv="history|vi"
 
 
 #alias ll="ls -al"
@@ -116,16 +116,16 @@ alias tree="lsd --tree"
 alias tl='tldr'
 alias t='top -s 10 -o mem -O cpu -U $USER'
 # fzf
-alias e="fd --type f --hidden --exclude .git|fzf -e|xargs nvim"
-alias f="fd --type f --hidden --exclude .git|fzf -e --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs nvim"
-alias v="fzf -e|xargs nvim"
+alias e="fd --type f --hidden --exclude .git|fzf -e|xargs vi"
+alias f="fd --type f --hidden --exclude .git|fzf -e --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down|xargs vi"
+alias v="fzf -e|xargs vi"
 alias fzf="fzf --tac --multi --reverse --cycle"
 
 #leaks , alternative to valgrind
 alias vg="leaks --atExit --"
 
-alias vi="/opt/homebrew/bin/nvim -p "
-alias vimdiff="/opt/homebrew/bin/nvim -d "
+alias vi="/opt/homebrew/bin/vi -p "
+alias vimdiff="/opt/homebrew/bin/vi -d "
 #exit terminal
 alias x="exit"
 
@@ -148,7 +148,7 @@ export FZF_CTRL_T_OPTS="--preview 'cat {}'"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 export FZF_ALT_C_OPTS="--preview 'ls -ltrh {} | head -50'"
-bindkey -s '^e' 'nvim $(fd --type f --color=never --hidden . |fzf)\n'
+bindkey -s '^e' 'vi $(fd --type f --color=never --hidden . |fzf)\n'
 
 # fzf
 
@@ -265,7 +265,7 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"PATH=~/.console-ninja/.bin:$PA
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
-complete -C '/usr/local/bin/aws_completer' aws
+#complete -C '/usr/local/bin/aws_completer' aws
 
 source <(fzf --zsh)
 
