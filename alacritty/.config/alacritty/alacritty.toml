@@ -58,7 +58,7 @@ bindings = [
 ]
 
 [colors.primary]
-background = "#1e1e2e"
+background = "#000000"
 foreground = "#cdd6f4"
 
 [colors.cursor]
