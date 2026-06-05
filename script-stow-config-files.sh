@@ -10,7 +10,8 @@ stow -t ~ -v skhd
 stow -t ~ -v tmux
 stow -t ~ -v yabai
 stow -t ~ -v kitty
+stow -t ~ -v zellij
+stow -t ~ -v alacritty
 #This will copy files to /etc/data folder (-t option)
 #stow -t /etc/data vim
-
 
