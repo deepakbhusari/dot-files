@@ -1,27 +1,25 @@
 # =========================================================
-# 0. OPTIONAL PROFILING
+# 0. Q PRE BLOCK (KEEP TOP)
 # =========================================================
-# zmodload zsh/zprof
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] &&
+  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
 # =========================================================
-# 1. CORE ENV (ULTRA LIGHT)
+# 1. CORE ENV (MINIMAL BOOT COST)
 # =========================================================
-
 export EDITOR=vi
 export TERM=xterm-256color
-
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
 setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE
-bindkey -v
 unsetopt XTRACE
+bindkey -v
 
 # =========================================================
-# 2. PATH (NO OVERHEAD)
+# 2. PATH (SINGLE PASS, FAST)
 # =========================================================
-
 typeset -U path PATH
 path=(
   /opt/homebrew/bin
@@ -34,14 +32,16 @@ path=(
 export PATH
 
 # =========================================================
-# 3. CORE ALIASES (FAST PATH ONLY)
+# 3. FAST ALIASES (ZERO LOAD COST)
 # =========================================================
-
 alias x="exit"
 
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 alias la="lsd -a --long --sort time --reverse"
+
+alias dus="du -hs . 2>/dev/null"
+alias d="dust -T 8 -B"
 
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias hx="hexdump -C"
@@ -49,20 +49,20 @@ alias hx="hexdump -C"
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
 
-# git core (FAST)
+# REQUIRED
+alias gb="git branch"
+
 alias gs="git status"
 alias gc="git commit -v"
 alias gp="git pull --rebase"
 alias gu="git push"
 alias gd="git diff"
-alias gb="git branch"   # ✅ ADDED (your request)
 
 # =========================================================
-# 4. FAST FUNCTIONS (NO PROMPT USAGE)
+# 4. FAST FUNCTIONS (NO HEAVY DEP)
 # =========================================================
-
-dir_size() { du -hsx "$1" }
 fld() { fold -s -w "$1" "$2" > "$3" }
+dir_size() { du -hsx "$1" }
 
 f1() {
   find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null
@@ -75,52 +75,50 @@ sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
 sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
 
 # =========================================================
-# 5. ZOXIDE (FAST)
+# 5. FAST GIT PROMPT (OPTION C — LIGHTWEIGHT)
 # =========================================================
+parse_git_branch() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return
+  git symbolic-ref --quiet --short HEAD 2>/dev/null ||
+  git rev-parse --short HEAD 2>/dev/null
+}
 
+setopt PROMPT_SUBST
+
+PS1='%F{cyan}%d%f %F{yellow}$(parse_git_branch)%f %F{green}->%f '
+
+# =========================================================
+# 6. ZOXIDE (FAST NAVIGATION)
+# =========================================================
 eval "$(/opt/homebrew/bin/zoxide init zsh)"
 alias zq="zoxide query -ls"
 
 # =========================================================
-# 6. FZF (LAZY LOAD)
+# 7. FZF (LAZY LOAD - IMPORTANT FOR SPEED)
 # =========================================================
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 
-_fzf_loaded=0
 fzf() {
-  if [[ $_fzf_loaded -eq 0 ]]; then
-    _fzf_loaded=1
-
-    [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] &&
-      source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-
-    [[ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]] &&
-      source /opt/homebrew/opt/fzf/shell/completion.zsh
-  fi
-
+  unset -f fzf
+  [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] &&
+    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
   command fzf "$@"
 }
 
 # =========================================================
-# 7. AUTOSUGGESTIONS (LAZY, NON-BLOCKING)
+# 8. AUTOSUGGESTIONS (LAZY)
 # =========================================================
+autoload -U add-zsh-hook
 
-_autosuggest_loaded=0
-
-load_autosuggest() {
-  [[ $_autosuggest_loaded -eq 1 ]] && return
-  _autosuggest_loaded=1
+_load_autosuggest() {
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  add-zsh-hook -d precmd _load_autosuggest
 }
-
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd load_autosuggest
+add-zsh-hook precmd _load_autosuggest
 
 # =========================================================
-# 8. TOOLCHAINS (NON-BLOCKING)
+# 9. OPTIONAL TOOLCHAINS (NON-BLOCKING)
 # =========================================================
-
 export PYENV_ROOT="$HOME/.pyenv"
 
 export PNPM_HOME="$HOME/Library/pnpm"
@@ -133,33 +131,13 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # =========================================================
-# 9. ⚡ FAST PROMPT (NO GIT FORK)
+# 10. PERFORMANCE MODE (SAFE DEFAULT)
 # =========================================================
-
-autoload -Uz add-zsh-hook
-setopt PROMPT_SUBST
-
-GIT_BRANCH=""
-
-update_git_branch() {
-  GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-}
-
-precmd() {
-  update_git_branch
-}
-
-PS1='%F{cyan}%/%f %F{yellow}${GIT_BRANCH:+($GIT_BRANCH)}%f %F{green}->%f '
-
-# =========================================================
-# 10. OPTIONAL COMPLETION (DISABLED FOR SPEED)
-# =========================================================
-# autoload -Uz compinit
-# compinit
-
-# =========================================================
-# 11. FINAL SAFETY
-# =========================================================
-
 unsetopt XTRACE
+
+# =========================================================
+# 11. Q POST BLOCK (KEEP BOTTOM)
+# =========================================================
+#[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] &&
+#  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
