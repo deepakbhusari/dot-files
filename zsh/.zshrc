@@ -5,7 +5,7 @@
   builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
 # =========================================================
-# 1. CORE ENV (MINIMAL BOOT COST)
+# 1. CORE ENV
 # =========================================================
 export EDITOR=vi
 export TERM=xterm-256color
@@ -18,7 +18,7 @@ unsetopt XTRACE
 bindkey -v
 
 # =========================================================
-# 2. PATH (SINGLE PASS, FAST)
+# 2. PATH (FAST SINGLE PASS)
 # =========================================================
 typeset -U path PATH
 path=(
@@ -32,7 +32,7 @@ path=(
 export PATH
 
 # =========================================================
-# 3. FAST ALIASES (ZERO LOAD COST)
+# 3. BASIC ALIASES
 # =========================================================
 alias x="exit"
 
@@ -49,9 +49,8 @@ alias hx="hexdump -C"
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
 
-# REQUIRED
+# git
 alias gb="git branch"
-
 alias gs="git status"
 alias gc="git commit -v"
 alias gp="git pull --rebase"
@@ -59,7 +58,7 @@ alias gu="git push"
 alias gd="git diff"
 
 # =========================================================
-# 4. FAST FUNCTIONS (NO HEAVY DEP)
+# 4. FUNCTIONS
 # =========================================================
 fld() { fold -s -w "$1" "$2" > "$3" }
 dir_size() { du -hsx "$1" }
@@ -75,49 +74,51 @@ sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
 sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
 
 # =========================================================
-# 5. FAST GIT PROMPT (OPTION C — LIGHTWEIGHT)
+# 5. RELIABLE GIT PROMPT ENGINE (FIXED)
 # =========================================================
-parse_git_branch() {
+
+GIT_BRANCH_CACHE=""
+
+_git_branch() {
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return
   git symbolic-ref --quiet --short HEAD 2>/dev/null ||
   git rev-parse --short HEAD 2>/dev/null
 }
 
-setopt PROMPT_SUBST
+_git_update() {
+  local b="$(_git_branch)"
+  if [[ -n "$b" ]]; then
+    GIT_BRANCH_CACHE="$b"
+  else
+    GIT_BRANCH_CACHE=""
+  fi
+}
 
-PS1='%F{cyan}%d%f %F{yellow}$(parse_git_branch)%f %F{green}->%f '
+autoload -U add-zsh-hook
+
+# runs before each prompt (safe + fast)
+_git_precmd() {
+  _git_update
+}
+
+add-zsh-hook precmd _git_precmd
 
 # =========================================================
-# 6. ZOXIDE (FAST NAVIGATION)
+# 6. CLEAN PROMPT (NO SPAM, NO BLANK NOISE)
+# =========================================================
+
+setopt PROMPT_SUBST
+
+PROMPT='%F{cyan}%d%f %F{yellow}${GIT_BRANCH_CACHE:+$GIT_BRANCH_CACHE }%f%F{green}→%f '
+
+# =========================================================
+# 7. ZOXIDE
 # =========================================================
 eval "$(/opt/homebrew/bin/zoxide init zsh)"
 alias zq="zoxide query -ls"
 
 # =========================================================
-# 7. FZF (LAZY LOAD - IMPORTANT FOR SPEED)
-# =========================================================
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-
-fzf() {
-  unset -f fzf
-  [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]] &&
-    source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-  command fzf "$@"
-}
-
-# =========================================================
-# 8. AUTOSUGGESTIONS (LAZY)
-# =========================================================
-autoload -U add-zsh-hook
-
-_load_autosuggest() {
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  add-zsh-hook -d precmd _load_autosuggest
-}
-add-zsh-hook precmd _load_autosuggest
-
-# =========================================================
-# 9. OPTIONAL TOOLCHAINS (NON-BLOCKING)
+# 8. OPTIONAL TOOLCHAINS (SAFE)
 # =========================================================
 export PYENV_ROOT="$HOME/.pyenv"
 
@@ -131,12 +132,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # =========================================================
-# 10. PERFORMANCE MODE (SAFE DEFAULT)
-# =========================================================
-unsetopt XTRACE
-
-# =========================================================
-# 11. Q POST BLOCK (KEEP BOTTOM)
+# 9. Q POST BLOCK (KEEP BOTTOM)
 # =========================================================
 #[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] &&
 #  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
