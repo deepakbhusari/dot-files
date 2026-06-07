@@ -1,10 +1,10 @@
 # =========================================================
-# 0. OPTIONAL PROFILING (ONLY ENABLE WHEN DEBUGGING)
+# 0. OPTIONAL PROFILING
 # =========================================================
 # zmodload zsh/zprof
 
 # =========================================================
-# 1. CORE ENV (FAST PATH ONLY)
+# 1. CORE ENV (ULTRA LIGHT)
 # =========================================================
 
 export EDITOR=vi
@@ -19,7 +19,7 @@ bindkey -v
 unsetopt XTRACE
 
 # =========================================================
-# 2. PATH (SINGLE PASS)
+# 2. PATH (NO OVERHEAD)
 # =========================================================
 
 typeset -U path PATH
@@ -34,7 +34,7 @@ path=(
 export PATH
 
 # =========================================================
-# 3. CORE ALIASES (ZERO COST)
+# 3. CORE ALIASES (FAST PATH ONLY)
 # =========================================================
 
 alias x="exit"
@@ -49,36 +49,30 @@ alias hx="hexdump -C"
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
 
-alias gb="git branch"
-alias gc="git commit -v"
-alias gd="git diff"
-alias gp="git pull --rebase"
+# git core (FAST)
 alias gs="git status"
-alias gpu="git push"
+alias gc="git commit -v"
+alias gp="git pull --rebase"
+alias gu="git push"
+alias gd="git diff"
+alias gb="git branch"   # ✅ ADDED (your request)
 
 # =========================================================
-# 4. FAST FUNCTIONS (NO FORKS IN PROMPT)
+# 4. FAST FUNCTIONS (NO PROMPT USAGE)
 # =========================================================
 
 dir_size() { du -hsx "$1" }
-
 fld() { fold -s -w "$1" "$2" > "$3" }
 
 f1() {
   find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null
 }
 
-c() {
-  clang -std=c2x -Wall -Wextra -pedantic "$@"
-}
+c() { clang -std=c2x -Wall -Wextra -pedantic "$@" }
 
-sd() {
-  sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2"
-}
+sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
 
-sdb() {
-  sed "s/\(num\)\(.*r\)/\1->\2/" "$2"
-}
+sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
 
 # =========================================================
 # 5. ZOXIDE (FAST)
@@ -88,7 +82,7 @@ eval "$(/opt/homebrew/bin/zoxide init zsh)"
 alias zq="zoxide query -ls"
 
 # =========================================================
-# 6. FZF (LAZY LOADED - CRITICAL FOR SPEED)
+# 6. FZF (LAZY LOAD)
 # =========================================================
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
@@ -109,7 +103,7 @@ fzf() {
 }
 
 # =========================================================
-# 7. AUTOSUGGESTIONS (LAZY ON FIRST PROMPT)
+# 7. AUTOSUGGESTIONS (LAZY, NON-BLOCKING)
 # =========================================================
 
 _autosuggest_loaded=0
@@ -124,7 +118,7 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd load_autosuggest
 
 # =========================================================
-# 8. OPTIONAL TOOLCHAINS (NO BOOT BLOCKING)
+# 8. TOOLCHAINS (NON-BLOCKING)
 # =========================================================
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -139,20 +133,26 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # =========================================================
-# 9. CLEAN GIT PROMPT (NO FORK PER PROMPT)
+# 9. ⚡ FAST PROMPT (NO GIT FORK)
 # =========================================================
 
-autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
 setopt PROMPT_SUBST
 
-zstyle ':vcs_info:git:*' formats '(%b)'
+GIT_BRANCH=""
 
-precmd() { vcs_info }
+update_git_branch() {
+  GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+}
 
-PS1='%F{cyan}%/%f %F{yellow}${vcs_info_msg_0_}%f %F{green}->%f '
+precmd() {
+  update_git_branch
+}
+
+PS1='%F{cyan}%/%f %F{yellow}${GIT_BRANCH:+($GIT_BRANCH)}%f %F{green}->%f '
 
 # =========================================================
-# 10. OPTIONAL COMPLETION (KEEP DISABLED FOR SPEED)
+# 10. OPTIONAL COMPLETION (DISABLED FOR SPEED)
 # =========================================================
 # autoload -Uz compinit
 # compinit
@@ -162,14 +162,4 @@ PS1='%F{cyan}%/%f %F{yellow}${vcs_info_msg_0_}%f %F{green}->%f '
 # =========================================================
 
 unsetopt XTRACE
-
-# =========================================================
-# 12. (OPTIONAL) AMAZON Q BLOCK
-# =========================================================
-#[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] &&
-#  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-
-#[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] &&
-#  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 
