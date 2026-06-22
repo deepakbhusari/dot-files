@@ -56,6 +56,8 @@ alias gc="git commit -v"
 alias gp="git pull --rebase"
 alias gu="git push"
 alias gd="git diff"
+alias gl="git log --stat"
+alias glo="git log --oneline --graph --decorate --all"
 
 # =========================================================
 # 4. FUNCTIONS
