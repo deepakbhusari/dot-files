@@ -43,6 +43,8 @@ alias la="lsd -a --long --sort time --reverse"
 alias dus="du -hs . 2>/dev/null"
 alias d="dust -T 8 -B"
 
+alias de="arch -arm64 ~/.config/emacs/bin/doom emacs"
+
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias hx="hexdump -C"
 
@@ -138,4 +140,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # =========================================================
 #[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] &&
 #  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+
+eval "$(mise activate zsh)"
 

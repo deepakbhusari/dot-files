@@ -10,19 +10,22 @@ x = 10
 y = 20
 
 [font]
-size = 19
+size =22 
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+#style = "Regular"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "Bold"
+#style = "Bold"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
-style = "Italic"
+#style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
 
 [scrolling]
 history = 50000
