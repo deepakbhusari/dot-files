@@ -22,6 +22,8 @@ bindkey -v
 # =========================================================
 typeset -U path PATH
 path=(
+  $HOME/.config/emacs/bin
+  /opt/homebrew/opt/llvm/bin
   /opt/homebrew/bin
   /usr/local/bin
   $HOME/.cargo/bin
