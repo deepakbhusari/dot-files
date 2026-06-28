@@ -26,7 +26,6 @@ path=(
   /opt/homebrew/opt/llvm/bin
   /opt/homebrew/bin
   /usr/local/bin
-  $HOME/.cargo/bin
   $HOME/.bun/bin
   $HOME/.console-ninja/.bin
   $path
