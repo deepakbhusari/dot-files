@@ -68,18 +68,25 @@ alias gls="glo --stat"
 # =========================================================
 # 4. FUNCTIONS
 # =========================================================
+
+#fold files with specific width
 fld() { fold -s -w "$1" "$2" > "$3" }
+
+#directory size
 dir_size() { du -hsx "$1" }
 
-f1() {
-  find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null
-}
+#find files with size that is passed to function
+f1() { find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null }
 
+#c compiler
 c() { clang -std=c2x -Wall -Wextra -pedantic "$@" }
 
 sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
 
 sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
+
+#function to copy file contents to clipboard
+cl() { cat "$1" | pbcopy }
 
 # =========================================================
 # 5. RELIABLE GIT PROMPT ENGINE (FIXED)
