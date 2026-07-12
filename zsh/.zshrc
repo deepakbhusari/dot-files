@@ -54,7 +54,8 @@ alias pyserver="python3 -m http.server 7777"
 
 # git
 alias gb="git branch"
-alias gs="git status --porcelain"
+alias gs="git status"
+alias gsp="git status --porcelain"
 alias gc="git commit -v"
 alias gp="git pull --rebase"
 alias gu="git push"
