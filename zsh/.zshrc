@@ -86,7 +86,7 @@ sd() { sed "s/\(.*\) \(.*\)/\1$1 \2/" "$2" }
 sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
 
 #function to copy file contents to clipboard
-cl() { cat "$1" | pbcopy }
+clip() { cat "$1" | pbcopy }
 
 # =========================================================
 # 5. RELIABLE GIT PROMPT ENGINE (FIXED)
