@@ -35,6 +35,7 @@ export PATH
 # =========================================================
 # 3. BASIC ALIASES
 # =========================================================
+alias brew='arch -arm64 brew'
 alias x="exit"
 
 alias ls="lsd"
@@ -60,6 +61,7 @@ alias gc="git commit -v"
 alias gp="git pull --rebase"
 alias gu="git push"
 alias gd="git diff"
+alias gdw="git diff -w"
 alias gl="git log --stat"
 #alias glo="git log --oneline --graph --decorate --all"
 alias glo="git log --color --graph --pretty=format:'%C(#dc322f)%h%C(#b58900)%d %C(#eee8d5)%s %C(#dc322f)| %C(#586f75)%cr %C(#dc322f)| %C(#586e75)%an%Creset' --abbrev-commit"
