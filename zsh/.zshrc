@@ -27,6 +27,7 @@ path=(
   /opt/homebrew/bin
   /usr/local/bin
   $HOME/.bun/bin
+  $HOME/.local/bin
   $HOME/.console-ninja/.bin
   $path
 )
@@ -36,7 +37,8 @@ export PATH
 # 3. BASIC ALIASES
 # =========================================================
 alias brew='arch -arm64 brew'
-alias x="exit"
+
+alias clr='clear'
 
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
@@ -67,6 +69,19 @@ alias gl="git log --stat"
 alias glo="git log --color --graph --pretty=format:'%C(#dc322f)%h%C(#b58900)%d %C(#eee8d5)%s %C(#dc322f)| %C(#586f75)%cr %C(#dc322f)| %C(#586e75)%an%Creset' --abbrev-commit"
 alias gls="glo --stat"
 
+#process
+alias pg="pgrep"
+
+alias x="exit"
+
+bl() { if [[ -n "$1" ]]; then
+        brew list|rg $1
+       else 
+         brew list
+       fi
+     }
+p() {ps aux|rg $1|rg -v "rg"}
+
 # =========================================================
 # 4. FUNCTIONS
 # =========================================================
@@ -89,6 +104,26 @@ sdb() { sed "s/\(num\)\(.*r\)/\1->\2/" "$2" }
 
 #function to copy file contents to clipboard
 clip() { cat "$1" | pbcopy }
+
+#function to show git commit message prefix
+showgit_message_prefix () {
+echo "build:
+chore:
+ci:
+docs:
+feat:
+fix:
+perf:
+refactor:
+revert:
+style:
+test:"
+}
+
+#function to reset to develop
+dev_git_reset_create_new_branch() {
+
+}
 
 # =========================================================
 # 5. RELIABLE GIT PROMPT ENGINE (FIXED)
