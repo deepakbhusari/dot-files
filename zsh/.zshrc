@@ -51,6 +51,7 @@ alias de="arch -arm64 ~/.config/emacs/bin/doom emacs"
 
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias hx="hexdump -C"
+alias h="cd ~"
 
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
