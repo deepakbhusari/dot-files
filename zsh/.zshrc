@@ -13,6 +13,7 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+
 setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE
 unsetopt XTRACE
 bindkey -v
@@ -48,6 +49,13 @@ alias dus="du -hs . 2>/dev/null"
 alias d="dust -T 8 -B"
 
 alias de="arch -arm64 ~/.config/emacs/bin/doom emacs"
+
+alias fdd='fd -t d | fzf|pbcopy'
+alias fdf='fd -t f | fzf|pbcopy'
+alias fdh='fd -HI .| fzf|pbcopy'
+#multiple files
+alias fdm='fd .|fzf -m|pbcopy'
+alias fdg='rg . -l|fzf --preview "cat {}"'
 
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias hx="hexdump -C"
@@ -191,4 +199,15 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 #  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
 eval "$(mise activate zsh)"
+
+# Use fzf for directory navigation
+function cd() {
+  if [[ $# -gt 0 ]]; then
+    builtin cd "$@"
+  else
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && builtin cd "$dir"
+  fi
+}
+
 
