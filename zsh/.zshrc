@@ -40,6 +40,7 @@ export PATH
 alias brew='arch -arm64 brew'
 
 alias clr='clear'
+alias cwd="pwd|pbcopy"
 
 alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
