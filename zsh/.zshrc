@@ -211,4 +211,25 @@ function cd() {
   fi
 }
 
+# gpo: Push current branch to origin
+gpo() {
+    # Ensure we're inside a Git repository
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "❌ Not inside a Git repository."
+        return 1
+    fi
+
+    # Get the current branch name
+    local branch
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+    # Handle detached HEAD state
+    if [[ -z "$branch" ]]; then
+        echo "❌ Detached HEAD state — cannot determine branch."
+        return 1
+    fi
+
+    echo "🚀 Pushing branch '$branch' to origin..."
+    git push origin "$branch"
+}
 
