@@ -42,12 +42,10 @@ alias brew='arch -arm64 brew'
 alias clr='clear'
 alias cwd="pwd|pbcopy"
 
-alias ls="lsd"
-alias ll="lsd --long --sort time --reverse"
-alias la="lsd -a --long --sort time --reverse"
 
 alias dus="du -hs . 2>/dev/null"
-alias d="dust -T 8 -B"
+alias d="du -khd 1"
+alias dust="dust -T 8 -B"
 
 alias de="arch -arm64 ~/.config/emacs/bin/doom emacs"
 
@@ -61,6 +59,11 @@ alias fdg='rg . -l|fzf --preview "cat {}"'
 alias g="rg --colors 'match:fg:magenta' 2>/dev/null"
 alias hx="hexdump -C"
 alias h="cd ~"
+alias hs="history 1000|rg"
+
+alias ls="lsd"
+alias ll="lsd --long --sort time --reverse"
+alias la="lsd -a --long --sort time --reverse"
 
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
