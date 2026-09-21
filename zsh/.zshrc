@@ -168,6 +168,38 @@ _git_precmd() {
 
 add-zsh-hook precmd _git_precmd
 
+
+# =========================================================
+# Change cursor shape depending on mode
+# =========================================================
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+    # Command mode: steady block
+    echo -ne '\e[2 q'
+    #MODE_INDICATOR="(cmd)"
+  else
+    # Insert mode: blinking bar
+    echo -ne '\e[6 q'
+    #MODE_INDICATOR="(ins)"
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+# Also set cursor shape on shell startup
+function zle-line-init {
+  zle -K viins
+  echo -ne '\e[6 q'
+  #MODE_INDICATOR="(ins)"
+}
+zle -N zle-line-init
+
+# Ensure cursor resets on exit
+function reset-cursor {
+  echo -ne '\e[0 q'
+}
+precmd_functions+=(reset-cursor)
+
 # =========================================================
 # 6. CLEAN PROMPT (NO SPAM, NO BLANK NOISE)
 # =========================================================
