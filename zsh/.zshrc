@@ -65,6 +65,7 @@ alias ls="lsd"
 alias ll="lsd --long --sort time --reverse"
 alias la="lsd -a --long --sort time --reverse"
 
+alias pk="pkg-config --libs --cflags"
 alias py="python3"
 alias pyserver="python3 -m http.server 7777"
 
