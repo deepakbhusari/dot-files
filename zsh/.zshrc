@@ -71,6 +71,7 @@ alias pyserver="python3 -m http.server 7777"
 
 # git
 alias gb="git branch"
+alias gds="git diff --staged"
 alias gs="git status"
 alias gsp="git status --porcelain"
 alias gss="git status --short"
