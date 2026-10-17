@@ -72,7 +72,6 @@ alias pyserver="python3 -m http.server 7777"
 # git
 alias gb="git branch"
 alias gds="git diff --staged"
-alias gs="git status"
 alias gsp="git status --porcelain"
 alias gss="git status --short"
 alias gcm="git commit -v -m"
@@ -84,7 +83,8 @@ alias gl="git log --stat"
 #alias glo="git log --oneline --graph --decorate --all"
 alias glo="git log --color --graph --pretty=format:'%C(#dc322f)%h%C(#b58900)%d %C(#eee8d5)%s %C(#dc322f)| %C(#586f75)%cr %C(#dc322f)| %C(#586e75)%an%Creset' --abbrev-commit"
 alias gls="glo --stat"
-alias gs="git switch "
+alias gs="git status"
+alias gsw="git switch "
 alias gsc="git switch -c"
 
 #process
