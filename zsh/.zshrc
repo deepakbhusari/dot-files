@@ -75,7 +75,7 @@ alias gds="git diff --staged"
 alias gs="git status"
 alias gsp="git status --porcelain"
 alias gss="git status --short"
-alias gc="git commit -v"
+alias gcm="git commit -v -m"
 alias gp="git pull --rebase"
 alias gu="git push"
 alias gd="git diff"
@@ -84,6 +84,8 @@ alias gl="git log --stat"
 #alias glo="git log --oneline --graph --decorate --all"
 alias glo="git log --color --graph --pretty=format:'%C(#dc322f)%h%C(#b58900)%d %C(#eee8d5)%s %C(#dc322f)| %C(#586f75)%cr %C(#dc322f)| %C(#586e75)%an%Creset' --abbrev-commit"
 alias gls="glo --stat"
+alias gs="git switch "
+alias gsc="git switch -c"
 
 #process
 alias pg="pgrep"
@@ -110,6 +112,15 @@ dir_size() { du -hsx "$1" }
 
 #find files with size that is passed to function
 f1() { find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null }
+
+#git clone function to shallow clone with depth=1 
+gcd() {
+  if [[ -n "$1" ]]; then
+    git clone --depth "$1" "${@:2}"
+  else
+    git clone "$@"
+  fi
+}
 
 #c compiler
 c() { clang -std=c2x -Wall -Wextra -pedantic "$@" }
@@ -270,4 +281,5 @@ gpo() {
     echo "🚀 Pushing branch '$branch' to origin..."
     git push origin "$branch"
 }
+
 
