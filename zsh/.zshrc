@@ -120,7 +120,12 @@ fdn() {
     return 2
   fi
 
-  find "$1" -type d -name "$2" -prune -exec du -sh {} + 2>/dev/null | sort -rh
+  #linux
+  #find "$1" -type d -name "$2" -prune -exec du -sh {} + 2>/dev/null | sort -rh
+  #mac
+  fd --type d --glob --case-sensitive --unrestricted "zsh" "." \
+ +       --exec-batch du -sh 2>/dev/null | sort -rh
+
 }
 
 #git clone function to shallow clone with depth=1 
