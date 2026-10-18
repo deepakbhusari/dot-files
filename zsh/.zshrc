@@ -147,9 +147,35 @@ style:
 test:"
 }
 
-#function to reset to develop
-dev_git_reset_create_new_branch() {
+#function to switch develop (rebase) and then create new branch
+branch() {
+  # Get current branch name
+  current=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || {
+    echo "Not in a git repository."
+    return 1
+  }
 
+  if git show-ref --verify --quiet refs/heads/develop; then
+    git switch develop || return 1
+    git pull --rebase || return 1
+  else
+    git switch main || return 1
+  fi
+
+  # Extract prefix and number
+  if [[ $current =~ ^([a-zA-Z0-9_-]+)-([0-9]+)$ ]]; then
+    prefix=${match[1]}
+    num=${match[2]}
+    new_branch="${prefix}-$((num + 1))"
+    echo "curr branch prefix : $prefix"
+
+    # Create and switch to new branch
+    git checkout -b "$new_branch"
+    echo "Created and switched to branch: $new_branch"
+  else
+    echo "Current branch name does not match pattern '<prefix>-<number>'."
+    return 1
+  fi
 }
 
 # =========================================================
@@ -281,5 +307,3 @@ gpo() {
     echo "🚀 Pushing branch '$branch' to origin..."
     git push origin "$branch"
 }
-
-
