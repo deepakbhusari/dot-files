@@ -113,6 +113,16 @@ dir_size() { du -hsx "$1" }
 #find files with size that is passed to function
 f1() { find . -type f -size +"$1" -exec ls -sh {} \; 2>/dev/null }
 
+#find directories by name and show their sizes
+fdn() {
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: fdn <path> <directory-name>"
+    return 2
+  fi
+
+  find "$1" -type d -name "$2" -prune -exec du -sh {} + 2>/dev/null | sort -rh
+}
+
 #git clone function to shallow clone with depth=1 
 gcd() {
   if [[ -n "$1" ]]; then
