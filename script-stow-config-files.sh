@@ -13,6 +13,7 @@ stow -t ~ -v kitty
 stow -t ~ -v zellij
 stow -t ~ -v alacritty
 stow -t ~ -v doom
+stow -t ~ -v herdr
 #This will copy files to /etc/data folder (-t option)
 #stow -t /etc/data vim
 
