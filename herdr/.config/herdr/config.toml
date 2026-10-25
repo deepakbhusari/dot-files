@@ -1,0 +1,37 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+a"
+
+[experimental]
+pane_history = true
+
+[session]
+resume_agents_on_restore = false
+
+[ui]
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "hidden"
+mouse_scroll_lines = 6
+prompt_new_tab_name = false
+pane_borders = false
+pane_outer_borders = false
+pane_scrollbars = true
+pane_gaps = false
+mouse_capture = true
+tab_bar_position = "bottom"
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "hostname" },
+  { type = "datetime", format = "%H:%M" },
+#  { type = "text", text = "local" },
+#  { type = "command", command = "~/.config/herdr/status.sh", interval_seconds = 10, timeout_seconds = 3 },
+]
+tab_bar_right_separator = " · "
+
+[remote]
+manage_ssh_config = true
+
+[advanced]
+scrollback_limit_bytes = 1_000_000_000
+
